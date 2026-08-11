@@ -21,7 +21,7 @@ export default function Footer() {
           {/* Social Links */}
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/sanjayshaa"
+              href="https://github.com/Sanjayshaa"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg bg-zinc-900 border border-white/5 hover:border-purple-500/20 text-zinc-400 hover:text-white transition-colors"
@@ -30,7 +30,7 @@ export default function Footer() {
               <Github size={16} />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/sanjay-s16/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg bg-zinc-900 border border-white/5 hover:border-purple-500/20 text-zinc-400 hover:text-white transition-colors"
@@ -39,7 +39,7 @@ export default function Footer() {
               <Linkedin size={16} />
             </a>
             <a
-              href="mailto:sanjays.dev@outlook.com"
+              href="mailto:sanjaysha9468@gmail.com"
               className="p-2 rounded-lg bg-zinc-900 border border-white/5 hover:border-purple-500/20 text-zinc-400 hover:text-white transition-colors"
               title="Email"
             >
@@ -51,9 +51,6 @@ export default function Footer() {
         {/* Bottom Metadata */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-8 pt-8 border-t border-white/5 text-[10px] sm:text-xs text-zinc-500">
           <span>&copy; {currentYear} Sanjay S. All rights reserved.</span>
-          <div className="flex gap-4">
-            <span>Built with React + Vite + Tailwind CSS</span>
-          </div>
         </div>
       </div>
     </footer>

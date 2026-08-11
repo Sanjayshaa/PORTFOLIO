@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion';
-import { User, Code, Database, Globe } from 'lucide-react';
+import { User, Code, Database, Globe, FileText } from 'lucide-react';
 
-export default function About() {
+interface AboutProps {
+  onOpenResume?: () => void;
+}
+
+export default function About({ onOpenResume }: AboutProps) {
   const cardData = [
     {
       icon: <Code className="text-purple-400" size={24} />,
@@ -21,7 +25,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
+    <section id="about" className="py-24 relative overflow-hidden bg-transparent">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Heading */}
@@ -71,6 +75,16 @@ export default function About() {
               <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">
                 Aside from coding, I focus on system efficiency, code optimization, and understanding the core fundamentals of computing. My ultimate objective is to contribute to scalable applications and help solve real-world problems.
               </p>
+
+              <div className="pt-2">
+                <button
+                  onClick={onOpenResume}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600/20 border border-purple-500/30 hover:bg-purple-600/30 text-purple-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
+                >
+                  <FileText size={16} />
+                  <span>Preview Full Resume</span>
+                </button>
+              </div>
             </div>
           </motion.div>
 

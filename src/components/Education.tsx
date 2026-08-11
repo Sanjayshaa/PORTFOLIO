@@ -3,7 +3,7 @@ import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 relative overflow-hidden bg-zinc-950/20">
+    <section id="education" className="py-24 relative overflow-hidden bg-transparent">
       {/* Background glowing decorations */}
       <div className="absolute top-[20%] left-[20%] w-[250px] h-[250px] bg-purple-600/5 rounded-full blur-[90px] pointer-events-none" />
 

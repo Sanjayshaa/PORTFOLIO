@@ -14,20 +14,28 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'Digital Lab Record System',
+    title: 'Digital Lab Record & Internal Evaluation System',
     description:
-      'A full-stack lab record management platform for colleges with student submissions, faculty evaluation, admin management, authentication, exam management, gamification, PDF handling, and role-based access control.',
+      'A full-stack academic platform for managing lab submissions, faculty evaluation, internal marks, experiment records, dashboards, AI evaluation, and role-based workflows.',
     image: '/images/lab_record_mockup.png',
-    tech: ['React', 'TypeScript', 'Node.js', 'Express', 'Supabase', 'PostgreSQL', 'Tailwind CSS'],
-    github: 'https://github.com/sanjayshaa/LAB-RECORD-SYSTEM',
+    tech: ['React', 'TypeScript', 'Node.js', 'Express', 'Supabase', 'PostgreSQL', 'AI Evaluation', 'Docker'],
+    github: 'https://github.com/Sanjayshaa/LAB-RECORD-SYSTEM',
   },
   {
-    title: 'Face Detection System',
+    title: 'OpsPilot — Docker Infrastructure Platform',
     description:
-      'A face recognition and detection system developed using Python and OpenCV for student identification, facial validation, and attendance-related workflows.',
+      'Centralized DevOps platform for Docker container lifecycle management, multi-container orchestration, 7-stage Compose deployment, real-time telemetry, and health scoring.',
+    image: '/images/opspilot_mockup.png',
+    tech: ['React', 'FastAPI', 'Python', 'Docker SDK', 'Docker Compose', 'PyYAML', 'psutil'],
+    github: 'https://github.com/Sanjayshaa',
+  },
+  {
+    title: 'Real-Time Face Detection & Recognition System',
+    description:
+      'A facial recognition and detection desktop application developed using Python and OpenCV for student identification, webcam capture, and MySQL database integration.',
     image: '/images/face_detection_mockup.png',
-    tech: ['Python', 'OpenCV', 'MySQL'],
-    github: 'https://github.com/sanjayshaa',
+    tech: ['Python', 'OpenCV', 'MySQL', 'Tkinter'],
+    github: 'https://github.com/Sanjayshaa',
   },
 ];
 
@@ -42,9 +50,10 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-mesh">
+    <section id="projects" className="py-24 relative overflow-hidden bg-transparent">
       {/* Glow background decorations */}
-      <div className="absolute top-[40%] left-[5%] w-[300px] h-[300px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-[40%] left-[5%] w-[300px] h-[300px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -55,9 +64,9 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold uppercase tracking-wider text-purple-400 mb-3"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold uppercase tracking-wider text-purple-400 mb-3"
           >
-            <FolderGit2 size={12} />
+            <FolderGit2 size={14} />
             Featured Projects
           </motion.div>
           <motion.h2
@@ -65,7 +74,7 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-extrabold tracking-tight font-display text-white"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display text-white"
           >
             What I've Built
           </motion.h2>
@@ -76,12 +85,12 @@ export default function Projects() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-zinc-400 max-w-lg mx-auto mt-4 text-sm sm:text-base"
           >
-            A look at my key developmental projects, bridging full-stack systems and automated workflows.
+            A look at my key developmental projects, bridging full-stack systems and automated DevOps workflows.
           </motion.p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsData.map((project) => (
             <motion.div
               key={project.title}
@@ -90,7 +99,7 @@ export default function Projects() {
               whileInView="visible"
               viewport={{ once: true, margin: '-50px' }}
               whileHover={{ y: -6 }}
-              className="group rounded-2xl glass-panel border border-white/5 overflow-hidden flex flex-col justify-between shadow-xl transition-all duration-300"
+              className="group rounded-2xl glass-panel border border-white/10 hover:border-purple-500/30 overflow-hidden flex flex-col justify-between shadow-xl transition-all duration-300 bg-zinc-950/80"
             >
               <div>
                 {/* Project Image */}
@@ -101,12 +110,12 @@ export default function Projects() {
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80" />
                 </div>
 
                 {/* Project Details */}
                 <div className="p-6 sm:p-8 space-y-4">
-                  <h3 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-purple-400 transition-colors">
+                  <h3 className="text-xl font-bold font-display text-white group-hover:text-purple-400 transition-colors">
                     {project.title}
                   </h3>
                   <p className="text-zinc-400 text-sm leading-relaxed min-h-[72px]">
@@ -135,7 +144,7 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 border border-white/10 hover:border-purple-500/30 text-xs sm:text-sm font-medium text-white hover:bg-zinc-800 transition-all group/btn"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 border border-white/10 hover:border-purple-500/40 text-xs sm:text-sm font-medium text-white hover:bg-zinc-800 transition-all group/btn shadow-md"
                   >
                     <Github size={16} className="group-hover/btn:scale-110 transition-transform" />
                     <span>View Repository</span>

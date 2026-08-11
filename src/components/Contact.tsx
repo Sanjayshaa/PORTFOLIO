@@ -46,7 +46,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-mesh">
+    <section id="contact" className="py-24 relative overflow-hidden bg-transparent">
       <div className="absolute bottom-0 right-[20%] w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -110,8 +110,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-[10px] text-zinc-500 uppercase tracking-wider">Email Me</p>
-                    <a href="mailto:sanjays.dev@outlook.com" className="text-white hover:text-purple-400 transition-colors text-sm font-medium">
-                      sanjays.dev@outlook.com
+                    <a href="mailto:sanjaysha9468@gmail.com" className="text-white hover:text-purple-400 transition-colors text-sm font-medium">
+                      sanjaysha9468@gmail.com
                     </a>
                   </div>
                 </div>
@@ -123,8 +123,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-[10px] text-zinc-500 uppercase tracking-wider">LinkedIn</p>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors text-sm font-medium">
-                      linkedin.com/in/sanjayshaa
+                    <a href="https://www.linkedin.com/in/sanjay-s16/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors text-sm font-medium">
+                      linkedin.com/in/sanjay-s16
                     </a>
                   </div>
                 </div>
@@ -136,18 +136,13 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-[10px] text-zinc-500 uppercase tracking-wider">GitHub</p>
-                    <a href="https://github.com/sanjayshaa" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors text-sm font-medium">
-                      github.com/sanjayshaa
+                    <a href="https://github.com/Sanjayshaa" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors text-sm font-medium">
+                      github.com/Sanjayshaa
                     </a>
                   </div>
                 </div>
 
               </div>
-            </div>
-
-            {/* Quote badge */}
-            <div className="pt-6 border-t border-white/5 text-xs text-zinc-500 italic">
-              "First, solve the problem. Then, write the code." — John Johnson
             </div>
           </motion.div>
 

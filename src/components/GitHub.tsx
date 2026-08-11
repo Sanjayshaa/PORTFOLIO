@@ -24,10 +24,10 @@ interface Repository {
 }
 
 const FALLBACK_PROFILE: GitHubProfile = {
-  login: 'sanjayshaa',
+  login: 'Sanjayshaa',
   name: 'Sanjay S',
   avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80', // Premium initial placeholder or fallback
-  html_url: 'https://github.com/sanjayshaa',
+  html_url: 'https://github.com/Sanjayshaa',
   bio: 'Information Technology Student | Full Stack Developer | Software Engineering Aspirant',
   public_repos: 12,
   followers: 18,
@@ -38,7 +38,7 @@ const FALLBACK_REPOS: Repository[] = [
   {
     name: 'LAB-RECORD-SYSTEM',
     description: 'A full-stack lab record management platform for colleges with student submissions, faculty evaluation, admin management, and PDF handling.',
-    html_url: 'https://github.com/sanjayshaa/LAB-RECORD-SYSTEM',
+    html_url: 'https://github.com/Sanjayshaa/LAB-RECORD-SYSTEM',
     stargazers_count: 5,
     forks_count: 2,
     language: 'TypeScript',
@@ -46,7 +46,7 @@ const FALLBACK_REPOS: Repository[] = [
   {
     name: 'Face-Detection-System',
     description: 'A facial detection and recognition tool using Python and OpenCV for student identification and attendance workflows.',
-    html_url: 'https://github.com/sanjayshaa',
+    html_url: 'https://github.com/Sanjayshaa',
     stargazers_count: 3,
     forks_count: 1,
     language: 'Python',
@@ -54,7 +54,7 @@ const FALLBACK_REPOS: Repository[] = [
   {
     name: 'developer-portfolio',
     description: 'Modern developer portfolio crafted with React, TypeScript, Tailwind CSS, and Framer Motion.',
-    html_url: 'https://github.com/sanjayshaa',
+    html_url: 'https://github.com/Sanjayshaa',
     stargazers_count: 2,
     forks_count: 0,
     language: 'TypeScript',
@@ -114,11 +114,11 @@ export default function GitHub() {
         }
 
         // Fetch new data
-        const profileRes = await fetch('https://api.github.com/users/sanjayshaa');
+        const profileRes = await fetch('https://api.github.com/users/Sanjayshaa');
         if (!profileRes.ok) throw new Error('Failed to fetch profile');
         const profileData = await profileRes.json();
 
-        const reposRes = await fetch('https://api.github.com/users/sanjayshaa/repos?sort=updated&per_page=6');
+        const reposRes = await fetch('https://api.github.com/users/Sanjayshaa/repos?sort=updated&per_page=6');
         if (!reposRes.ok) throw new Error('Failed to fetch repos');
         const reposData = await reposRes.json();
 
@@ -152,7 +152,8 @@ export default function GitHub() {
   };
 
   return (
-    <section id="github" className="py-24 relative overflow-hidden bg-mesh">
+    <section id="github" className="py-24 relative overflow-hidden bg-transparent">
+
       <div className="absolute top-[20%] right-[10%] w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

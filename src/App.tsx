@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,18 +8,46 @@ import Education from './components/Education';
 import GitHub from './components/GitHub';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ResumeModal from './components/ResumeModal';
+import MoltenMetal from './components/reactbits/MoltenMetal';
 
 function App() {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+
+  const handleOpenResume = () => setIsResumeOpen(true);
+  const handleCloseResume = () => setIsResumeOpen(false);
+
   return (
     <div className="relative min-h-screen bg-brand-dark text-zinc-100 overflow-hidden font-sans selection:bg-purple-500/30 selection:text-white">
-      {/* Decorative subtle background grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_80%,transparent_100%)] pointer-events-none" />
+      {/* React Bits Component: MoltenMetal Chrome Silver Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-60">
+        <MoltenMetal
+          color1="#000000"
+          color2="#ffffff"
+          color3="#6b6b6b"
+          speed={0.4}
+          scale={4.8}
+          detail={3}
+          glow={1.5}
+          coreSize={0.11}
+          swirl={1}
+          fold={-0.2}
+          blackPoint={0.05}
+          brightness={1.2}
+          colorMode="ember"
+          grain={false}
+          grainIntensity={0.04}
+          mouseInteraction={true}
+          mouseStrength={0.4}
+          opacity={1.0}
+        />
+      </div>
 
-      <Navbar />
+      <Navbar onOpenResume={handleOpenResume} />
       
       <main>
-        <Hero />
-        <About />
+        <Hero onOpenResume={handleOpenResume} />
+        <About onOpenResume={handleOpenResume} />
         <Skills />
         <Projects />
         <Education />
@@ -27,6 +56,8 @@ function App() {
       </main>
 
       <Footer />
+
+      <ResumeModal isOpen={isResumeOpen} onClose={handleCloseResume} />
     </div>
   );
 }

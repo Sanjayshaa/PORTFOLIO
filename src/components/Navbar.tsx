@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X, Code2, FileText } from 'lucide-react';
 
 interface NavLink {
   name: string;
   href: string;
+}
+
+interface NavbarProps {
+  onOpenResume?: () => void;
 }
 
 const navLinks: NavLink[] = [
@@ -16,7 +20,7 @@ const navLinks: NavLink[] = [
   { name: 'Contact', href: '#contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onOpenResume }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -87,10 +91,26 @@ export default function Navbar() {
                 </a>
               );
             })}
+
+            {/* Resume Trigger Button */}
+            <button
+              onClick={onOpenResume}
+              className="ml-2 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
+            >
+              <FileText size={14} />
+              <span>Resume</span>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={onOpenResume}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-semibold"
+            >
+              <FileText size={13} />
+              <span>Resume</span>
+            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 border border-zinc-800/30 transition-colors"
@@ -129,6 +149,16 @@ export default function Navbar() {
                   </a>
                 );
               })}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onOpenResume) onOpenResume();
+                }}
+                className="w-full flex items-center gap-2 px-4 py-3 text-base font-semibold text-purple-300 bg-purple-500/10 rounded-lg"
+              >
+                <FileText size={18} />
+                <span>Preview Resume</span>
+              </button>
             </div>
           </motion.div>
         )}
