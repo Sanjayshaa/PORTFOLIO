@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { Terminal, ArrowUpRight, FileText, Cpu, Server, Database, Container } from 'lucide-react';
+import { Terminal, ArrowUpRight, FileText, Cpu, Container, CheckCircle2 } from 'lucide-react';
 import { Github } from './icons';
-import SpecularButton from './reactbits/SpecularButton';
-import ModelViewer from './reactbits/ModelViewer';
 
 interface HeroProps {
   onOpenResume?: () => void;
@@ -31,29 +29,29 @@ export default function Hero({ onOpenResume }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-transparent">
+    <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-transparent">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center"
         >
           
-          {/* Left Column - Large Confident Typography & Narrative */}
+          {/* Left Column - Headline, Narrative & Fixed Horizontal CTA Row */}
           <div className="lg:col-span-7 space-y-7 text-left">
             
             {/* Tagline Badge */}
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2 font-mono text-xs text-[#A78BFA] tracking-widest uppercase font-semibold">
               <span className="h-1.5 w-1.5 rounded-full bg-[#A78BFA] animate-ping" />
-              <span>SANJAY S · FULL-STACK &amp; SOFTWARE DEVELOPER</span>
+              <span>SANJAY S · B.TECH INFORMATION TECHNOLOGY</span>
             </motion.div>
 
             {/* Big Headline */}
             <motion.h1
               variants={itemVariants}
-              className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.06]"
+              className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.08]"
             >
               I build software systems <br />
               <span className="text-gradient">that solve real problems.</span>
@@ -64,123 +62,138 @@ export default function Hero({ onOpenResume }: HeroProps) {
               variants={itemVariants}
               className="text-base sm:text-lg text-[#8B95A5] max-w-xl leading-relaxed font-sans"
             >
-              Information Technology undergraduate focused on building robust full-stack web applications, backend REST APIs, relational datastores, and containerized developer infrastructure.
+              Information Technology undergraduate with practical experience across full-stack web applications, backend REST APIs, relational datastores, and Docker containerized infrastructure.
             </motion.p>
 
-            {/* Action CTAs */}
+            {/* FIXED CTA BUTTONS — STRICTLY ONE HORIZONTAL ROW ON DESKTOP */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap items-center gap-3.5 pt-2"
+              className="pt-2 w-full"
             >
-              {/* Primary CTA: VIEW WORK */}
-              <a href="#projects">
-                <SpecularButton
-                  size="lg"
-                  radius={12}
-                  tint="#a855f7"
-                  tintOpacity={0.25}
-                  blur={16}
-                  textColor="#ffffff"
-                  lineColor="#a855f7"
-                  baseColor="#3b82f6"
-                  intensity={1.5}
-                  thickness={1.5}
-                  speed={0.4}
-                  followMouse={true}
-                  proximity={300}
+              <div className="flex flex-col sm:flex-row lg:flex-nowrap items-stretch sm:items-center gap-3 w-full max-w-full">
+                
+                {/* 1. PRIMARY: VIEW WORK */}
+                <a
+                  href="#projects"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors shadow-lg shadow-purple-500/25 whitespace-nowrap cursor-pointer"
                 >
-                  <Terminal size={18} className="text-purple-300" />
+                  <Terminal size={16} />
                   <span>VIEW WORK</span>
-                </SpecularButton>
-              </a>
+                </a>
 
-              {/* Secondary CTA: CONTACT ME */}
-              <a href="#contact">
-                <SpecularButton
-                  size="lg"
-                  radius={12}
-                  tint="#0D1117"
-                  tintOpacity={0.6}
-                  blur={16}
-                  textColor="#ffffff"
-                  lineColor="#ffffff"
-                  baseColor="#242A33"
-                  intensity={1.2}
-                  thickness={1}
-                  speed={0.35}
-                  followMouse={true}
+                {/* 2. SECONDARY: CONTACT ME */}
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <span>CONTACT ME</span>
-                </SpecularButton>
-              </a>
+                </a>
 
-              {/* GitHub Link */}
-              <a
-                href="https://github.com/Sanjayshaa"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117]/80 text-[#8B95A5] hover:text-white font-mono text-xs tracking-wider uppercase transition-colors"
-              >
-                <Github size={16} />
-                <span>GitHub</span>
-                <ArrowUpRight size={13} />
-              </a>
+                {/* 3. TERTIARY: GITHUB */}
+                <a
+                  href="https://github.com/Sanjayshaa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-3.5 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-[#8B95A5] hover:text-white font-mono text-xs font-semibold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  <Github size={16} />
+                  <span>GITHUB</span>
+                  <ArrowUpRight size={13} />
+                </a>
 
-              {/* Resume Trigger */}
-              <button
-                onClick={onOpenResume}
-                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117]/80 text-[#8B95A5] hover:text-white font-mono text-xs tracking-wider uppercase transition-colors cursor-pointer"
-              >
-                <FileText size={16} className="text-purple-400" />
-                <span>Resume</span>
-              </button>
+                {/* 4. TERTIARY: RESUME */}
+                <button
+                  onClick={onOpenResume}
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-3.5 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-[#8B95A5] hover:text-white font-mono text-xs font-semibold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
+                  type="button"
+                >
+                  <FileText size={16} className="text-[#A78BFA]" />
+                  <span>RESUME</span>
+                </button>
+
+              </div>
             </motion.div>
 
           </div>
 
-          {/* Right Column - 3D Tech Core & Engineering System Visual */}
+          {/* Right Column - Purposeful System Architecture Visual (Option A / B) */}
           <motion.div
             variants={itemVariants}
             className="lg:col-span-5"
           >
-            <div className="relative rounded-2xl bg-[#0D1117] border border-[#242A33] p-6 space-y-6 overflow-hidden shadow-2xl backdrop-blur-xl">
+            <div className="relative rounded-2xl bg-[#0D1117] border border-[#242A33] p-6 space-y-5 overflow-hidden shadow-2xl backdrop-blur-xl">
               
-              {/* Top Beam Accent */}
+              {/* Top Accent Line */}
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500" />
 
-              {/* Interactive 3D ModelViewer Canvas */}
-              <div className="h-[240px] w-full rounded-xl bg-[#07090D] border border-[#242A33] relative overflow-hidden flex items-center justify-center">
-                <ModelViewer
-                  enableMouseParallax={true}
-                  enableManualRotation={true}
-                  enableHoverRotation={true}
-                  enableManualZoom={true}
-                  autoFrame={true}
-                  fadeIn={true}
-                  autoRotate={true}
-                  showScreenshotButton={false}
-                  autoRotateSpeed={0.35}
-                />
+              {/* Panel Header */}
+              <div className="flex items-center justify-between border-b border-[#242A33] pb-3.5">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-lg bg-[#07090D] border border-[#242A33] text-[#A78BFA]">
+                    <Cpu size={18} />
+                  </div>
+                  <div>
+                    <h3 className="font-mono font-bold text-white text-xs uppercase tracking-wider">SYSTEM ARCHITECTURE</h3>
+                    <p className="font-mono text-[11px] text-[#8B95A5]">Digital Lab Evaluation Pipeline</p>
+                  </div>
+                </div>
+                <span className="font-mono text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>ACTIVE RUNTIME</span>
+                </span>
               </div>
 
-              {/* Dynamic System Nodes Stream */}
-              <div className="grid grid-cols-2 gap-2.5 font-mono text-xs">
-                <div className="p-2.5 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center gap-2">
-                  <Cpu size={14} className="text-purple-400" />
-                  <span className="text-white font-bold">SYSTEMS</span>
+              {/* Architecture Flow Diagram (Frontend → API → Database → Docker Sandbox) */}
+              <div className="space-y-2.5 font-mono text-xs">
+                
+                {/* Step 1: Frontend */}
+                <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="h-2 w-2 rounded-full bg-purple-400" />
+                    <span className="font-bold text-white">01 / FRONTEND</span>
+                  </div>
+                  <span className="text-[11px] text-[#8B95A5]">React · TypeScript · Vite</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center gap-2">
-                  <Server size={14} className="text-blue-400" />
-                  <span className="text-white font-bold">REST APIs</span>
+
+                {/* Connection Arrow */}
+                <div className="flex justify-center text-[#8B95A5] text-[10px]">↓ HTTP / REST API Request</div>
+
+                {/* Step 2: Backend API */}
+                <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="h-2 w-2 rounded-full bg-blue-400" />
+                    <span className="font-bold text-white">02 / BACKEND API</span>
+                  </div>
+                  <span className="text-[11px] text-[#8B95A5]">Node.js · Express / FastAPI</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center gap-2">
-                  <Database size={14} className="text-emerald-400" />
-                  <span className="text-white font-bold">DATASTORES</span>
+
+                {/* Connection Arrow */}
+                <div className="flex justify-center text-[#8B95A5] text-[10px]">↓ ORM / Datastore Queries</div>
+
+                {/* Step 3: Database */}
+                <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                    <span className="font-bold text-white">03 / DATASTORE</span>
+                  </div>
+                  <span className="text-[11px] text-[#8B95A5]">PostgreSQL / Supabase</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center gap-2">
-                  <Container size={14} className="text-cyan-400" />
-                  <span className="text-white font-bold">CONTAINERS</span>
+
+                {/* Connection Arrow */}
+                <div className="flex justify-center text-[#8B95A5] text-[10px]">↓ Isolated Container Execution</div>
+
+                {/* Step 4: Docker Execution Engine */}
+                <div className="p-3 rounded-xl bg-[#07090D] border border-cyan-500/30 flex items-center justify-between bg-cyan-500/5">
+                  <div className="flex items-center gap-2.5">
+                    <Container size={14} className="text-cyan-400" />
+                    <span className="font-bold text-cyan-300">04 / DOCKER EXECUTION</span>
+                  </div>
+                  <span className="text-[11px] text-cyan-400 flex items-center gap-1 font-semibold">
+                    <CheckCircle2 size={12} />
+                    <span>Isolated Code Sandbox</span>
+                  </span>
                 </div>
+
               </div>
 
             </div>
