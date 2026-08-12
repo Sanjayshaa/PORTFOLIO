@@ -1,28 +1,40 @@
-.dock-outer {
+.dock-wrapper {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 50;
+  z-index: 9999;
   display: flex;
-  max-width: 95vw;
-  align-items: center;
   justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.dock-outer {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  max-width: 95vw;
   pointer-events: auto;
 }
 
 .dock-panel {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: flex-end;
   width: fit-content;
-  gap: 0.6rem;
+  gap: 0.65rem;
   border-radius: 1.25rem;
-  background-color: rgba(13, 17, 23, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 0.4rem 0.6rem;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(167, 139, 250, 0.15);
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.45rem 0.65rem;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(167, 139, 250, 0.2);
 }
 
 .dock-item {
@@ -34,17 +46,19 @@
   background-color: #07090D;
   border: 1px solid #242A33;
   color: #F5F7FA;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   outline: none;
   transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  will-change: width, height;
 }
 
 .dock-item:hover,
 .dock-item:focus-visible {
-  border-color: rgba(167, 139, 250, 0.6);
+  border-color: rgba(167, 139, 250, 0.8);
   background-color: #161B22;
   color: #A78BFA;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
 }
 
 .dock-icon {
@@ -57,7 +71,7 @@
 
 .dock-label {
   position: absolute;
-  top: -2.2rem;
+  top: -2.4rem;
   left: 50%;
   width: fit-content;
   white-space: nowrap;
@@ -67,9 +81,9 @@
   padding: 0.25rem 0.65rem;
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.05em;
-  color: #F5F7FA;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
   pointer-events: none;
 }

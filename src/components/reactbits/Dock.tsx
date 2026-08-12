@@ -153,39 +153,41 @@ export default function Dock({
   const height = useSpring(heightRow, spring);
 
   return (
-    <motion.div style={{ height }} className="dock-outer">
-      <motion.div
-        onMouseMove={({ pageX }) => {
-          isHovered.set(1);
-          mouseX.set(pageX);
-        }}
-        onMouseLeave={() => {
-          isHovered.set(0);
-          mouseX.set(Infinity);
-        }}
-        className={`dock-panel ${className}`}
-        style={{ height: panelHeight }}
-        role="toolbar"
-        aria-label="Application dock"
-      >
-        {items.map((item, index) => (
-          <DockItem
-            key={index}
-            onClick={item.onClick}
-            href={item.href}
-            className={item.className}
-            mouseX={mouseX}
-            spring={spring}
-            distance={distance}
-            magnification={magnification}
-            baseItemSize={baseItemSize}
-            label={item.label}
-          >
-            <DockIcon>{item.icon}</DockIcon>
-            <DockLabel>{item.label}</DockLabel>
-          </DockItem>
-        ))}
+    <div className="dock-wrapper">
+      <motion.div style={{ height }} className="dock-outer">
+        <motion.div
+          onMouseMove={({ clientX }) => {
+            isHovered.set(1);
+            mouseX.set(clientX);
+          }}
+          onMouseLeave={() => {
+            isHovered.set(0);
+            mouseX.set(Infinity);
+          }}
+          className={`dock-panel ${className}`}
+          style={{ height: panelHeight }}
+          role="toolbar"
+          aria-label="Application dock"
+        >
+          {items.map((item, index) => (
+            <DockItem
+              key={index}
+              onClick={item.onClick}
+              href={item.href}
+              className={item.className}
+              mouseX={mouseX}
+              spring={spring}
+              distance={distance}
+              magnification={magnification}
+              baseItemSize={baseItemSize}
+              label={item.label}
+            >
+              <DockIcon>{item.icon}</DockIcon>
+              <DockLabel>{item.label}</DockLabel>
+            </DockItem>
+          ))}
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Code2, FileText, ArrowUpRight } from 'lucide-react';
 import SpecularButton from './reactbits/SpecularButton';
 
@@ -19,72 +19,12 @@ const navLinks: NavLink[] = [
   { name: 'Education', href: '#education' },
 ];
 
-function MagneticNavItem({
-  link,
-  isActive,
-  mouseX,
-  prefersReduced
-}: {
-  link: NavLink;
-  isActive: boolean;
-  mouseX: any;
-  prefersReduced: boolean;
-}) {
-  const itemRef = useRef<HTMLAnchorElement>(null);
-  const baseSize = 70;
-  const distance = 160;
-
-  const mouseDistance = useTransform(mouseX, (val: number) => {
-    const rect = itemRef.current?.getBoundingClientRect() ?? { x: 0, width: baseSize };
-    return val - (rect.x + rect.width / 2);
-  });
-
-  const targetScale = useTransform(mouseDistance, [-distance, 0, distance], [1.0, 1.12, 1.0]);
-  const targetY = useTransform(mouseDistance, [-distance, 0, distance], [0, -2, 0]);
-
-  const scale = useSpring(targetScale, { mass: 0.15, stiffness: 180, damping: 14 });
-  const y = useSpring(targetY, { mass: 0.15, stiffness: 180, damping: 14 });
-
-  return (
-    <motion.a
-      ref={itemRef}
-      href={link.href}
-      style={{
-        scale: prefersReduced ? 1 : scale,
-        y: prefersReduced ? 0 : y,
-      }}
-      className={`relative px-4 py-1.5 text-xs font-mono tracking-wider uppercase rounded-full transition-colors duration-200 inline-block cursor-pointer select-none ${
-        isActive ? 'text-white font-bold' : 'text-[#8B95A5] hover:text-white'
-      }`}
-      aria-current={isActive ? 'page' : undefined}
-    >
-      {isActive && (
-        <motion.span
-          layoutId="activeNavBackground"
-          className="absolute inset-0 bg-[#242A33] border border-purple-500/30 rounded-full -z-10 shadow-sm shadow-purple-500/20"
-          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-        />
-      )}
-      <span>{link.name}</span>
-    </motion.a>
-  );
-}
-
 export default function Navbar({ onOpenResume }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const [prefersReduced, setPrefersReduced] = useState(false);
-
-  const navContainerRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(Infinity);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReduced(mediaQuery.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
-    mediaQuery.addEventListener('change', handler);
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
@@ -95,7 +35,7 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 160 && rect.bottom >= 160) {
+          if (rect.top <= 140 && rect.bottom >= 140) {
             currentSection = section;
             break;
           }
@@ -105,26 +45,20 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      mediaQuery.removeEventListener('change', handler);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#07090D]/85 backdrop-blur-xl py-3 shadow-2xl shadow-black/60'
-          : 'bg-transparent py-5'
+        isScrolled ? 'glass-navbar py-3 shadow-lg' : 'bg-transparent py-5'
       }`}
-      aria-label="Main Portfolio Header Navigation"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-12">
+        <div className="flex items-center justify-between">
           
-          {/* LEFT: Brand Logo */}
-          <a href="#hero" className="flex items-center gap-2 group cursor-pointer">
+          {/* Brand Logo */}
+          <a href="#" className="flex items-center gap-2 group">
             <div className="p-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 group-hover:bg-purple-500/20 group-hover:border-purple-500/40 transition-colors">
               <Code2 size={18} />
             </div>
@@ -133,55 +67,51 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
             </span>
           </a>
 
-          {/* CENTER: Magnetic Dock-Style Center Navigation */}
-          <div
-            ref={navContainerRef}
-            onMouseMove={(e) => mouseX.set(e.clientX)}
-            onMouseLeave={() => mouseX.set(Infinity)}
-            className="hidden md:flex items-center gap-1.5 bg-[#0D1117]/85 backdrop-blur-xl p-1.5 rounded-full border border-[#242A33] shadow-lg"
-            role="menubar"
-          >
+          {/* Center Navigation Links */}
+          <div className="hidden md:flex items-center gap-1 bg-[#0D1117]/80 p-1.5 rounded-full border border-[#242A33]">
             {navLinks.map((link) => {
               const sectionId = link.href.substring(1);
               const isActive = activeSection === sectionId;
               return (
-                <MagneticNavItem
+                <a
                   key={link.name}
-                  link={link}
-                  isActive={isActive}
-                  mouseX={mouseX}
-                  prefersReduced={prefersReduced}
-                />
+                  href={link.href}
+                  className={`relative px-4 py-1.5 text-xs font-mono tracking-wider uppercase rounded-full transition-colors duration-200 ${
+                    isActive ? 'text-white font-bold' : 'text-[#8B95A5] hover:text-white'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavBackground"
+                      className="absolute inset-0 bg-[#242A33] rounded-full -z-10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  {link.name}
+                </a>
               );
             })}
           </div>
 
-          {/* RIGHT: Utility Action Links */}
+          {/* Right Action Links */}
           <div className="hidden md:flex items-center gap-3">
-            {/* GitHub ↗ */}
-            <motion.a
-              whileHover={prefersReduced ? {} : { scale: 1.05 }}
-              whileTap={prefersReduced ? {} : { scale: 0.98 }}
+            <a
               href="https://github.com/Sanjayshaa"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-mono tracking-wider uppercase text-[#8B95A5] hover:text-white transition-colors px-2.5 py-1.5 rounded-lg hover:bg-[#0D1117]"
+              className="inline-flex items-center gap-1 text-xs font-mono tracking-wider uppercase text-[#8B95A5] hover:text-white transition-colors px-2 py-1"
             >
               <span>GitHub</span>
               <ArrowUpRight size={14} className="text-purple-400" />
-            </motion.a>
+            </a>
 
-            {/* Contact */}
-            <motion.a
-              whileHover={prefersReduced ? {} : { scale: 1.05 }}
-              whileTap={prefersReduced ? {} : { scale: 0.98 }}
+            <a
               href="#contact"
-              className="inline-flex items-center gap-1 text-xs font-mono tracking-wider uppercase text-[#8B95A5] hover:text-white transition-colors px-2.5 py-1.5 rounded-lg hover:bg-[#0D1117]"
+              className="inline-flex items-center gap-1 text-xs font-mono tracking-wider uppercase text-[#8B95A5] hover:text-white transition-colors px-2 py-1"
             >
               <span>Contact</span>
-            </motion.a>
+            </a>
 
-            {/* Resume Trigger CTA */}
             <SpecularButton
               size="sm"
               radius={999}
@@ -222,7 +152,7 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 border border-[#242A33] transition-colors cursor-pointer"
-              aria-label="Toggle Navigation Menu"
+              aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
