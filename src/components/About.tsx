@@ -3,8 +3,8 @@ import { User, Code2, Database, Terminal } from 'lucide-react';
 
 export default function About() {
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-transparent border-t border-[#242A33]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+    <section id="about" className="py-20 relative overflow-hidden bg-transparent">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
         {/* Section Heading */}
         <div>

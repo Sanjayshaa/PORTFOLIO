@@ -69,10 +69,22 @@ function TechCoreMesh() {
 
 export interface ModelViewerProps {
   autoRotate?: boolean;
+  autoRotateSpeed?: number;
+  enableMouseParallax?: boolean;
+  enableManualRotation?: boolean;
+  enableHoverRotation?: boolean;
+  enableManualZoom?: boolean;
+  autoFrame?: boolean;
+  fadeIn?: boolean;
+  showScreenshotButton?: boolean;
   className?: string;
 }
 
-export default function ModelViewer({ autoRotate = true, className = '' }: ModelViewerProps) {
+export default function ModelViewer({ 
+  autoRotate = true, 
+  autoRotateSpeed = 1.5,
+  className = '' 
+}: ModelViewerProps) {
   return (
     <div className={`w-full h-full relative cursor-grab active:cursor-grabbing ${className}`}>
       <Canvas gl={{ alpha: true, antialias: true }}>
@@ -90,7 +102,7 @@ export default function ModelViewer({ autoRotate = true, className = '' }: Model
           enableZoom={false}
           enablePan={false}
           autoRotate={autoRotate}
-          autoRotateSpeed={1.5}
+          autoRotateSpeed={autoRotateSpeed}
           maxPolarAngle={Math.PI / 1.5}
           minPolarAngle={Math.PI / 3}
         />

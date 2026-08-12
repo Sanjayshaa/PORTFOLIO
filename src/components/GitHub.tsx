@@ -1,239 +1,205 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Star, GitFork, ExternalLink, FolderGit2 } from 'lucide-react';
+import { GitBranch, Star, ArrowUpRight, FolderGit2, Loader2 } from 'lucide-react';
 import { Github } from './icons';
 
-interface GitHubProfile {
-  login: string;
-  name: string;
-  avatar_url: string;
-  html_url: string;
-  bio: string;
-  public_repos: number;
-  followers: number;
-  following: number;
-}
-
-interface Repository {
+interface RepoData {
+  id: number;
   name: string;
   description: string;
   html_url: string;
   stargazers_count: number;
   forks_count: number;
   language: string;
+  updated_at: string;
 }
 
-const FALLBACK_PROFILE: GitHubProfile = {
-  login: 'Sanjayshaa',
-  name: 'Sanjay S',
-  avatar_url: 'https://github.com/Sanjayshaa.png',
-  html_url: 'https://github.com/Sanjayshaa',
-  bio: 'Information Technology Student | Full Stack Developer | Software Engineering Aspirant',
-  public_repos: 12,
-  followers: 18,
-  following: 15,
-};
-
-const FALLBACK_REPOS: Repository[] = [
+const fallbackRepos: RepoData[] = [
   {
+    id: 1,
     name: 'LAB-RECORD-SYSTEM',
-    description: 'A full-stack lab record management platform for colleges with student submissions, faculty evaluation, admin management, and PDF handling.',
+    description: 'Digital laboratory record submission and automated code evaluation platform built with React, Node.js, and PostgreSQL.',
     html_url: 'https://github.com/Sanjayshaa/LAB-RECORD-SYSTEM',
+    stargazers_count: 3,
+    forks_count: 1,
+    language: 'TypeScript',
+    updated_at: '2026-02-10T00:00:00Z',
+  },
+  {
+    id: 2,
+    name: 'PORTFOLIO',
+    description: 'Modern editorial software engineer portfolio website featuring 3D WebGL components, Motion physics, and dark design tokens.',
+    html_url: 'https://github.com/Sanjayshaa/PORTFOLIO',
     stargazers_count: 5,
     forks_count: 2,
     language: 'TypeScript',
+    updated_at: '2026-02-12T00:00:00Z',
   },
   {
+    id: 3,
     name: 'OpsPilot',
-    description: 'A Docker container orchestration and telemetry platform for managing multi-container application lifecycles.',
+    description: 'Docker container lifecycle management and Compose multi-container orchestration dashboard with real-time telemetry.',
+    html_url: 'https://github.com/Sanjayshaa',
+    stargazers_count: 2,
+    forks_count: 0,
+    language: 'Python',
+    updated_at: '2026-01-20T00:00:00Z',
+  },
+  {
+    id: 4,
+    name: 'Face-Detection-System',
+    description: 'Real-time OpenCV computer vision desktop application for student identification and MySQL database synchronization.',
     html_url: 'https://github.com/Sanjayshaa',
     stargazers_count: 4,
     forks_count: 1,
     language: 'Python',
-  },
-  {
-    name: 'Face-Detection-System',
-    description: 'A facial detection and recognition tool using Python and OpenCV for student identification and attendance workflows.',
-    html_url: 'https://github.com/Sanjayshaa',
-    stargazers_count: 3,
-    forks_count: 1,
-    language: 'Python',
-  },
-  {
-    name: 'PORTFOLIO',
-    description: 'Art-directed software engineer portfolio crafted with React, TypeScript, Tailwind CSS, and WebGL React Bits shaders.',
-    html_url: 'https://github.com/Sanjayshaa/PORTFOLIO',
-    stargazers_count: 2,
-    forks_count: 0,
-    language: 'TypeScript',
+    updated_at: '2025-11-15T00:00:00Z',
   },
 ];
 
 export default function GitHub() {
-  const [profile, setProfile] = useState<GitHubProfile>(FALLBACK_PROFILE);
-  const [repos, setRepos] = useState<Repository[]>(FALLBACK_REPOS);
+  const [repos, setRepos] = useState<RepoData[]>(fallbackRepos);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchGitHubData = async () => {
+    async function fetchRepos() {
+      setIsLoading(true);
       try {
-        const [profileRes, reposRes] = await Promise.all([
-          fetch('https://api.github.com/users/Sanjayshaa'),
-          fetch('https://api.github.com/users/Sanjayshaa/repos?sort=updated&per_page=6'),
-        ]);
-
-        if (profileRes.ok) {
-          const profileData = await profileRes.json();
-          setProfile(profileData);
-        }
-
-        if (reposRes.ok) {
-          const reposData = await reposRes.json();
-          if (Array.isArray(reposData) && reposData.length > 0) {
-            setRepos(reposData.slice(0, 4));
+        const res = await fetch('https://api.github.com/users/Sanjayshaa/repos?sort=updated&per_page=6');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setRepos(data);
           }
         }
-      } catch (err) {
-        console.warn('Using fallback GitHub data:', err);
+      } catch {
+        // Use fallbacks silently
+      } finally {
+        setIsLoading(false);
       }
-    };
-
-    fetchGitHubData();
+    }
+    fetchRepos();
   }, []);
 
   return (
-    <section id="github" className="py-24 relative overflow-hidden bg-transparent border-t border-[#242A33]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+    <section id="github" className="py-20 relative overflow-hidden bg-transparent">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
         
         {/* Section Heading */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 text-xs font-mono text-purple-400 tracking-widest uppercase mb-3"
-          >
-            <Github size={14} />
-            <span>06 / OPEN SOURCE &amp; CODEBASE HUB</span>
-          </motion.div>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-2 text-xs font-mono text-[#A78BFA] tracking-widest uppercase mb-3"
+            >
+              <Github size={14} />
+              <span>OPEN SOURCE</span>
+            </motion.div>
+            
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display text-white"
+            >
+              Public Repositories &amp; Code
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-[#8B95A5] max-w-xl mt-2 text-sm sm:text-base leading-relaxed"
+            >
+              Code, experiments, and public work maintained on GitHub.
+            </motion.p>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          {/* Secondary Profile CTA */}
+          <motion.a
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display text-white"
+            href="https://github.com/Sanjayshaa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0D1117] hover:bg-[#161B22] border border-[#242A33] hover:border-purple-500/40 text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-lg cursor-pointer self-start sm:self-auto"
           >
-            Authentic GitHub Repositories
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[#8B95A5] max-w-xl mt-4 text-sm sm:text-base leading-relaxed"
-          >
-            Direct live synchronization with my GitHub profile (<strong className="text-purple-300 font-mono">@Sanjayshaa</strong>).
-          </motion.p>
+            <Github size={16} />
+            <span>VIEW GITHUB PROFILE ↗</span>
+          </motion.a>
         </div>
 
-        {/* GitHub Profile Dashboard Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="editorial-panel p-6 sm:p-8 space-y-6"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <img
-                src={profile.avatar_url}
-                alt={profile.name}
-                className="w-16 h-16 rounded-full border-2 border-purple-500/40"
-              />
-              <div>
-                <h3 className="font-display font-bold text-xl text-white">{profile.name}</h3>
-                <p className="font-mono text-xs text-purple-400">@{profile.login}</p>
-                <p className="text-xs text-[#8B95A5] mt-1 max-w-md">{profile.bio}</p>
-              </div>
-            </div>
-
-            <a
-              href={profile.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium text-xs sm:text-sm transition-colors self-start sm:self-auto"
-            >
-              <Github size={16} />
-              <span>View GitHub Profile ↗</span>
-            </a>
+        {/* Repository Cards Grid */}
+        {isLoading ? (
+          <div className="flex items-center justify-center py-12 text-[#8B95A5] font-mono text-xs gap-2">
+            <Loader2 size={16} className="animate-spin text-purple-400" />
+            <span>Loading public repositories...</span>
           </div>
-
-          {/* Quick GitHub Metrics */}
-          <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#242A33] text-center font-mono">
-            <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33]">
-              <span className="block font-bold text-lg text-white">{profile.public_repos}</span>
-              <span className="text-[11px] text-[#8B95A5] uppercase tracking-wider">Public Repos</span>
-            </div>
-            <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33]">
-              <span className="block font-bold text-lg text-white">{profile.followers}</span>
-              <span className="text-[11px] text-[#8B95A5] uppercase tracking-wider">Followers</span>
-            </div>
-            <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33]">
-              <span className="block font-bold text-lg text-white">{profile.following}</span>
-              <span className="text-[11px] text-[#8B95A5] uppercase tracking-wider">Following</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Public Repository Grid */}
-        <div className="space-y-4">
-          <span className="font-mono text-xs text-[#8B95A5] uppercase tracking-widest font-semibold block">
-            PUBLIC REPOSITORIES
-          </span>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {repos.map((repo) => (
-              <a
-                key={repo.name}
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {repos.map((repo, idx) => (
+              <motion.a
+                key={repo.id || idx}
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="editorial-panel editorial-panel-hover p-6 flex flex-col justify-between space-y-4 group"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                className="group relative p-6 rounded-2xl bg-[#0D1117] border border-[#242A33] hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 space-y-4 flex flex-col justify-between"
               >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-purple-400 font-mono text-xs font-bold">
-                      <FolderGit2 size={16} />
-                      <span className="group-hover:text-white transition-colors">{repo.name}</span>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <div className="p-2 rounded-lg bg-[#07090D] border border-[#242A33] text-purple-400 group-hover:border-purple-500/40 transition-colors">
+                        <FolderGit2 size={16} />
+                      </div>
+                      <h3 className="font-mono font-bold text-white text-base tracking-tight group-hover:text-purple-300 transition-colors">
+                        {repo.name}
+                      </h3>
                     </div>
-                    <ExternalLink size={14} className="text-[#8B95A5] group-hover:text-white transition-colors" />
+                    <ArrowUpRight size={16} className="text-[#8B95A5] group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
-                  <p className="text-xs text-[#8B95A5] leading-relaxed line-clamp-2">
-                    {repo.description || 'Public software engineering repository.'}
+
+                  <p className="text-xs text-[#8B95A5] font-sans line-clamp-2 leading-relaxed">
+                    {repo.description || 'Public GitHub repository showcasing software engineering work.'}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between font-mono text-xs text-[#8B95A5] pt-2 border-t border-[#242A33]">
-                  <span className="px-2 py-0.5 rounded bg-[#07090D] border border-[#242A33] text-purple-300">
-                    {repo.language || 'Code'}
-                  </span>
-                  <div className="flex items-center gap-3">
-                    <span className="flex items-center gap-1">
+                <div className="pt-3 border-t border-[#242A33] flex items-center justify-between text-xs font-mono text-[#8B95A5]">
+                  <div className="flex items-center gap-4">
+                    {repo.language && (
+                      <span className="flex items-center gap-1.5 text-zinc-300">
+                        <span className="h-2 w-2 rounded-full bg-purple-400" />
+                        <span>{repo.language}</span>
+                      </span>
+                    )}
+
+                    <span className="flex items-center gap-1 hover:text-white transition-colors">
                       <Star size={13} className="text-amber-400" />
                       <span>{repo.stargazers_count}</span>
                     </span>
-                    <span className="flex items-center gap-1">
-                      <GitFork size={13} className="text-blue-400" />
+
+                    <span className="flex items-center gap-1 hover:text-white transition-colors">
+                      <GitBranch size={13} />
                       <span>{repo.forks_count}</span>
                     </span>
                   </div>
+
+                  <span className="text-[11px] text-purple-400/80 font-semibold group-hover:text-purple-300 transition-colors">
+                    View Repository →
+                  </span>
                 </div>
-              </a>
+              </motion.a>
             ))}
           </div>
-        </div>
+        )}
 
       </div>
     </section>

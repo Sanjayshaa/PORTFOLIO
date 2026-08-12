@@ -37,8 +37,8 @@ const principles: Principle[] = [
 
 export default function Principles() {
   return (
-    <section id="principles" className="py-24 relative overflow-hidden bg-transparent border-t border-[#242A33]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="principles" className="py-20 relative overflow-hidden bg-transparent">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
         {/* Section Heading */}
         <div className="mb-16">

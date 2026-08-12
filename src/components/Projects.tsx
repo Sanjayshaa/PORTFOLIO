@@ -16,7 +16,7 @@ export default function Projects({ onOpenCaseStudy }: ProjectsProps) {
       year: '2026',
       img: '/images/lab_record_mockup.png',
       url: 'https://github.com/Sanjayshaa/LAB-RECORD-SYSTEM',
-      height: 380,
+      height: 350,
       featured: true,
       onCaseStudy: onOpenCaseStudy,
     },
@@ -28,7 +28,7 @@ export default function Projects({ onOpenCaseStudy }: ProjectsProps) {
       year: '2026',
       img: '/images/opspilot_mockup.png',
       url: 'https://github.com/Sanjayshaa',
-      height: 320,
+      height: 350,
     },
     {
       id: 'campusbridge',
@@ -38,7 +38,7 @@ export default function Projects({ onOpenCaseStudy }: ProjectsProps) {
       year: '2025',
       img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
       url: 'https://github.com/Sanjayshaa',
-      height: 300,
+      height: 350,
     },
     {
       id: 'face-detection',
@@ -48,13 +48,13 @@ export default function Projects({ onOpenCaseStudy }: ProjectsProps) {
       year: '2025',
       img: '/images/face_detection_mockup.png',
       url: 'https://github.com/Sanjayshaa',
-      height: 340,
+      height: 350,
     },
   ];
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-transparent border-t border-[#242A33]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+    <section id="projects" className="py-20 relative overflow-hidden bg-transparent">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
         
         {/* Section Heading */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
@@ -64,10 +64,10 @@ export default function Projects({ onOpenCaseStudy }: ProjectsProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="flex items-center gap-2 text-xs font-mono text-purple-400 tracking-widest uppercase mb-3"
+              className="flex items-center gap-2 text-xs font-mono text-[#A78BFA] tracking-widest uppercase mb-3"
             >
               <FolderGit2 size={14} />
-              <span>01 / SELECTED WORK</span>
+              <span>PROJECT WORK</span>
             </motion.div>
             
             <motion.h2
@@ -77,11 +77,20 @@ export default function Projects({ onOpenCaseStudy }: ProjectsProps) {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display text-white"
             >
-              Featured Engineering Projects
+              Things I've Built
             </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-[#8B95A5] max-w-xl mt-2 text-sm sm:text-base leading-relaxed"
+            >
+              Real products, experiments, and engineering systems I've built.
+            </motion.p>
           </div>
 
-          {/* Direct Flagship Case Study CTA Button */}
+          {/* Flagship Case Study CTA Button */}
           <motion.button
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -95,7 +104,7 @@ export default function Projects({ onOpenCaseStudy }: ProjectsProps) {
         </div>
 
         {/* React Bits Masonry Showcase Grid */}
-        <div className="pt-4">
+        <div className="pt-2">
           <Masonry
             items={projectItems}
             ease="power3.out"
