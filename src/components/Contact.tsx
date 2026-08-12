@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, CheckCircle2, ArrowUpRight, FileText } from 'lucide-react';
+import { Mail, Send, CheckCircle2, ArrowUpRight, FileText, Copy, Check } from 'lucide-react';
 import { Github, Linkedin } from './icons';
 
 interface ContactProps {
@@ -9,16 +9,35 @@ interface ContactProps {
 
 export default function Contact({ onOpenResume }: ContactProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const emailAddress = 'sanjaysha9468@gmail.com';
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(emailAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
+
+    // Trigger direct mailto dispatch to recipient sanjaysha9468@gmail.com
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Hi Sanjay,\n\n${formData.message}\n\n---\nSender Information:\nName: ${formData.name}\nEmail: ${formData.email}`
+    );
+    const mailtoUrl = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+
+    window.location.href = mailtoUrl;
+
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
       setFormData({ name: '', email: '', message: '' });
-    }, 4000);
+    }, 6000);
   };
 
   return (
@@ -58,20 +77,33 @@ export default function Contact({ onOpenResume }: ContactProps) {
             I am currently open to software development internships, full-time engineering roles, and technical collaborations.
           </motion.p>
 
+          {/* Contact Actions Bar */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="pt-4 flex flex-wrap items-center justify-center gap-4"
+            className="pt-4 flex flex-wrap items-center justify-center gap-3.5"
           >
+            {/* Direct Email Button */}
             <a
-              href="mailto:sanjaysha9468@gmail.com"
-              className="px-6 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors shadow-xl shadow-purple-500/20"
+              href={`mailto:${emailAddress}`}
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors shadow-xl shadow-purple-500/20"
             >
-              sanjaysha9468@gmail.com
+              <Mail size={16} />
+              <span>{emailAddress}</span>
             </a>
 
+            {/* Copy Email Button */}
+            <button
+              onClick={handleCopyEmail}
+              className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl bg-[#0D1117] border border-[#242A33] hover:border-purple-500/40 text-[#8B95A5] hover:text-white font-mono text-xs tracking-wider uppercase transition-colors cursor-pointer"
+            >
+              {copied ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
+              <span>{copied ? 'Copied to Clipboard' : 'Copy Email'}</span>
+            </button>
+
+            {/* LinkedIn Link */}
             <a
               href="https://www.linkedin.com/in/sanjay-s16/"
               target="_blank"
@@ -83,6 +115,7 @@ export default function Contact({ onOpenResume }: ContactProps) {
               <ArrowUpRight size={14} className="text-[#8B95A5]" />
             </a>
 
+            {/* GitHub Link */}
             <a
               href="https://github.com/Sanjayshaa"
               target="_blank"
@@ -94,6 +127,7 @@ export default function Contact({ onOpenResume }: ContactProps) {
               <ArrowUpRight size={14} className="text-[#8B95A5]" />
             </a>
 
+            {/* Resume Trigger */}
             <button
               onClick={onOpenResume}
               className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-[#0D1117] border border-[#242A33] hover:border-purple-500/40 text-white font-mono text-xs tracking-wider uppercase transition-colors cursor-pointer"
@@ -104,7 +138,7 @@ export default function Contact({ onOpenResume }: ContactProps) {
           </motion.div>
         </div>
 
-        {/* Minimal Message Form */}
+        {/* Message Form */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -113,15 +147,35 @@ export default function Contact({ onOpenResume }: ContactProps) {
           className="editorial-panel p-8 sm:p-10 max-w-2xl mx-auto"
         >
           {submitted ? (
-            <div className="py-12 text-center space-y-3">
-              <div className="p-3 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 inline-block">
+            <div className="py-10 text-center space-y-4">
+              <div className="p-3 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 inline-block">
                 <CheckCircle2 size={32} />
               </div>
-              <h3 className="font-display font-bold text-xl text-white">Message Dispatched</h3>
-              <p className="text-xs font-mono text-[#8B95A5]">Thank you! I will respond to your email promptly.</p>
+              <h3 className="font-display font-bold text-xl text-white">Opening Email Client...</h3>
+              <p className="text-xs font-mono text-[#8B95A5] max-w-md mx-auto leading-relaxed">
+                Your message has been formatted and directed to <strong className="text-purple-300">sanjaysha9468@gmail.com</strong>.
+              </p>
+              <div className="pt-2">
+                <a
+                  href={`mailto:${emailAddress}?subject=${encodeURIComponent(`Inquiry from ${formData.name}`)}&body=${encodeURIComponent(formData.message)}`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors"
+                >
+                  <Mail size={14} />
+                  <span>Send via Email Client</span>
+                </a>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="flex items-center justify-between border-b border-[#242A33] pb-4">
+                <span className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                  SEND DIRECT MESSAGE
+                </span>
+                <span className="font-mono text-[11px] text-[#8B95A5]">
+                  TO: sanjaysha9468@gmail.com
+                </span>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="font-mono text-xs text-[#8B95A5] uppercase tracking-wider block">Your Name</label>
@@ -164,7 +218,7 @@ export default function Contact({ onOpenResume }: ContactProps) {
                 className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-xl shadow-purple-500/20 cursor-pointer flex items-center justify-center gap-2"
               >
                 <Send size={15} />
-                <span>Send Direct Message</span>
+                <span>Send Message to sanjaysha9468@gmail.com</span>
               </button>
             </form>
           )}
