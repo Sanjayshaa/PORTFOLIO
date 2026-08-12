@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { FileText, ArrowDown, Code2, Sparkles, Terminal, Layers } from 'lucide-react';
-import { Github, Linkedin } from './icons';
+import { FileText, Terminal, ArrowUpRight, Cpu } from 'lucide-react';
+import { Github } from './icons';
 import SpecularButton from './reactbits/SpecularButton';
 
 interface HeroProps {
@@ -9,13 +9,13 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenResume }: HeroProps) {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
   };
@@ -25,203 +25,184 @@ export default function Hero({ onOpenResume }: HeroProps) {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { type: 'spring', stiffness: 100, damping: 15 },
+      transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-transparent">
-      {/* Ambient background glow accents */}
-      <div className="absolute top-[15%] left-[10%] w-[320px] h-[320px] bg-purple-600/15 rounded-full blur-[120px] animate-pulse-slow pointer-events-none z-0" />
-      <div className="absolute bottom-[15%] right-[10%] w-[380px] h-[380px] bg-blue-600/15 rounded-full blur-[140px] animate-pulse-slow pointer-events-none z-0" />
-
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-32 pb-20 overflow-hidden bg-transparent">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-6 sm:space-y-8"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
         >
-          {/* Status Tag */}
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs sm:text-sm font-medium text-purple-300 border border-purple-500/20 shadow-lg">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
-            </span>
-            <Sparkles size={14} className="text-purple-400" />
-            <span>Available for Internships & Full-time Roles</span>
-          </motion.div>
-
-          {/* Name & Title Header */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white">
-              Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-300 to-blue-400">Sanjay S</span>
-            </h1>
-
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-300 to-cyan-400 font-display">
-              Full Stack Developer &amp; Software Engineer
-            </h2>
-          </motion.div>
-
-          {/* Bio Intro */}
-          <motion.p
-            variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed font-sans"
-          >
-            Information Technology undergraduate specializing in full-stack web applications, AI-assisted tools, and containerized DevOps infrastructure.
-          </motion.p>
-
-          {/* Action CTAs - React Bits Specular Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 pt-4"
-          >
-            {/* View Resume Specular Button */}
-            <SpecularButton
-              size="lg"
-              radius={14}
-              tint="#a855f7"
-              tintOpacity={0.2}
-              blur={16}
-              textColor="#ffffff"
-              lineColor="#a855f7"
-              baseColor="#3b82f6"
-              intensity={1.5}
-              shineSize={12}
-              shineFade={45}
-              thickness={1.5}
-              speed={0.4}
-              followMouse={true}
-              proximity={300}
-              autoAnimate={true}
-              onClick={onOpenResume}
-            >
-              <FileText size={18} className="text-purple-300" />
-              <span>Preview Resume</span>
-            </SpecularButton>
-
-            {/* Explore Projects Specular Button */}
-            <a href="#projects">
-              <SpecularButton
-                size="lg"
-                radius={14}
-                tint="#18181b"
-                tintOpacity={0.4}
-                blur={16}
-                textColor="#ffffff"
-                lineColor="#ffffff"
-                baseColor="#3f3f46"
-                intensity={1.2}
-                shineSize={10}
-                shineFade={40}
-                thickness={1}
-                speed={0.35}
-                followMouse={true}
-                proximity={250}
-              >
-                <Terminal size={18} className="text-purple-400" />
-                <span>Explore Projects</span>
-              </SpecularButton>
-            </a>
-
-            {/* GitHub Specular Button */}
-            <a href="https://github.com/Sanjayshaa" target="_blank" rel="noopener noreferrer">
-              <SpecularButton
-                size="lg"
-                radius={14}
-                tint="#18181b"
-                tintOpacity={0.4}
-                blur={16}
-                textColor="#ffffff"
-                lineColor="#c084fc"
-                baseColor="#27272a"
-                intensity={1.2}
-                shineSize={10}
-                shineFade={40}
-                thickness={1}
-                speed={0.35}
-                followMouse={true}
-                proximity={250}
-              >
-                <Github size={18} />
-                <span>GitHub</span>
-              </SpecularButton>
-            </a>
-
-            {/* LinkedIn Specular Button */}
-            <a href="https://www.linkedin.com/in/sanjay-s16/" target="_blank" rel="noopener noreferrer">
-              <SpecularButton
-                size="lg"
-                radius={14}
-                tint="#18181b"
-                tintOpacity={0.4}
-                blur={16}
-                textColor="#ffffff"
-                lineColor="#38bdf8"
-                baseColor="#27272a"
-                intensity={1.2}
-                shineSize={10}
-                shineFade={40}
-                thickness={1}
-                speed={0.35}
-                followMouse={true}
-                proximity={250}
-              >
-                <Linkedin size={18} className="text-blue-400" />
-                <span>LinkedIn</span>
-              </SpecularButton>
-            </a>
-          </motion.div>
-
-          {/* Quick Metrics Bar */}
-          <motion.div
-            variants={itemVariants}
-            className="pt-8 max-w-3xl mx-auto grid grid-cols-3 gap-4"
-          >
-            <div className="p-4 rounded-xl glass-panel border border-white/5 space-y-1">
-              <div className="flex items-center justify-center gap-1.5 text-purple-400">
-                <Code2 size={16} />
-                <span className="font-bold text-lg text-white font-display">3+</span>
-              </div>
-              <p className="text-[11px] text-zinc-400 font-medium uppercase tracking-wider">Full-Stack Apps</p>
-            </div>
+          
+          {/* Left Column - Editorial Headline & Narrative */}
+          <div className="lg:col-span-7 space-y-8 text-left">
             
-            <div className="p-4 rounded-xl glass-panel border border-white/5 space-y-1">
-              <div className="flex items-center justify-center gap-1.5 text-blue-400">
-                <Layers size={16} />
-                <span className="font-bold text-lg text-white font-display">12+</span>
+            {/* Tagline Badge */}
+            <motion.div variants={itemVariants} className="space-y-2">
+              <div className="inline-flex items-center gap-2 font-mono text-xs text-purple-400 tracking-widest uppercase font-semibold">
+                <span className="h-1.5 w-1.5 rounded-full bg-purple-400 animate-ping" />
+                <span>SOFTWARE ENGINEER · FULL-STACK · BACKEND · DEVOPS</span>
               </div>
-              <p className="text-[11px] text-zinc-400 font-medium uppercase tracking-wider">Tech Ecosystem</p>
-            </div>
 
-            <div className="p-4 rounded-xl glass-panel border border-white/5 space-y-1">
-              <div className="flex items-center justify-center gap-1.5 text-emerald-400">
-                <Sparkles size={16} />
-                <span className="font-bold text-lg text-white font-display">2027</span>
+              {/* Big Editorial Headline */}
+              <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05]">
+                I build software systems <br />
+                <span className="text-gradient">that solve real problems.</span>
+              </h1>
+            </motion.div>
+
+            {/* Narrative Subtitle */}
+            <motion.p
+              variants={itemVariants}
+              className="text-base sm:text-lg text-[#8B95A5] max-w-xl leading-relaxed font-sans"
+            >
+              Information Technology undergraduate focused on full-stack web applications, backend system architecture, API automation, and containerized developer infrastructure.
+            </motion.p>
+
+            {/* Action CTAs */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap items-center gap-4 pt-2"
+            >
+              {/* Explore Selected Work */}
+              <a href="#projects">
+                <SpecularButton
+                  size="lg"
+                  radius={14}
+                  tint="#a855f7"
+                  tintOpacity={0.25}
+                  blur={16}
+                  textColor="#ffffff"
+                  lineColor="#a855f7"
+                  baseColor="#3b82f6"
+                  intensity={1.5}
+                  thickness={1.5}
+                  speed={0.4}
+                  followMouse={true}
+                  proximity={300}
+                >
+                  <Terminal size={18} className="text-purple-300" />
+                  <span>View Selected Work</span>
+                </SpecularButton>
+              </a>
+
+              {/* GitHub Link Button */}
+              <a href="https://github.com/Sanjayshaa" target="_blank" rel="noopener noreferrer">
+                <SpecularButton
+                  size="lg"
+                  radius={14}
+                  tint="#0D1117"
+                  tintOpacity={0.6}
+                  blur={16}
+                  textColor="#ffffff"
+                  lineColor="#ffffff"
+                  baseColor="#242A33"
+                  intensity={1.2}
+                  thickness={1}
+                  speed={0.35}
+                  followMouse={true}
+                >
+                  <Github size={18} />
+                  <span>GitHub</span>
+                  <ArrowUpRight size={14} className="text-[#8B95A5]" />
+                </SpecularButton>
+              </a>
+
+              {/* Resume Trigger */}
+              <button
+                onClick={onOpenResume}
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117]/80 text-[#8B95A5] hover:text-white font-mono text-xs tracking-wider uppercase transition-colors cursor-pointer"
+              >
+                <FileText size={16} className="text-purple-400" />
+                <span>Preview Resume</span>
+              </button>
+            </motion.div>
+
+          </div>
+
+          {/* Right Column - Live Engineering Profile Panel */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-5"
+          >
+            <div className="editorial-panel p-6 sm:p-8 space-y-6 relative overflow-hidden">
+              {/* Top Accent Line */}
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500" />
+
+              {/* Panel Header */}
+              <div className="flex items-center justify-between border-b border-[#242A33] pb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-lg bg-[#07090D] border border-[#242A33] text-purple-400">
+                    <Cpu size={18} />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-white text-base tracking-tight">SANJAY S</h3>
+                    <p className="font-mono text-[11px] text-[#8B95A5] uppercase tracking-wider">ENGINEER PROFILE</p>
+                  </div>
+                </div>
+                <span className="font-mono text-xs text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded border border-purple-500/20">
+                  2023 — 2027
+                </span>
               </div>
-              <p className="text-[11px] text-zinc-400 font-medium uppercase tracking-wider">B.Tech IT Grad</p>
+
+              {/* Focus Areas */}
+              <div className="space-y-2">
+                <span className="font-mono text-[11px] text-[#8B95A5] uppercase tracking-widest block font-semibold">
+                  CURRENT FOCUS
+                </span>
+                <div className="space-y-1.5 text-xs text-zinc-300 font-sans">
+                  <div className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-purple-400" />
+                    <span>Full-Stack Application Development</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                    <span>Backend REST APIs &amp; Relational Datastores</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                    <span>DevOps &amp; Docker Container Orchestration</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Primary Tech Stack */}
+              <div className="space-y-2 pt-2 border-t border-[#242A33]">
+                <span className="font-mono text-[11px] text-[#8B95A5] uppercase tracking-widest block font-semibold">
+                  CORE TECH STACK
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {['React', 'Node.js', 'Express', 'Python', 'FastAPI', 'PostgreSQL', 'Docker', 'Supabase'].map((tech) => (
+                    <span key={tech} className="px-2.5 py-1 rounded bg-[#07090D] border border-[#242A33] font-mono text-[11px] text-zinc-300">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Status */}
+              <div className="pt-2 border-t border-[#242A33] flex items-center justify-between">
+                <span className="font-mono text-[11px] text-[#8B95A5] uppercase tracking-widest font-semibold">
+                  STATUS
+                </span>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Available for Opportunities</span>
+                </div>
+              </div>
+
             </div>
           </motion.div>
 
         </motion.div>
-      </div>
 
-      {/* Scroll Down Indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-500 hover:text-white transition-colors cursor-pointer z-10"
-        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-      >
-        <span className="text-[10px] uppercase tracking-widest font-semibold">Scroll Down</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-        >
-          <ArrowDown size={16} />
-        </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

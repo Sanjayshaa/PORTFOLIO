@@ -1,127 +1,104 @@
 import { motion } from 'framer-motion';
-import { User, Code, Database, Globe, FileText } from 'lucide-react';
+import { User, Code2, Database, Terminal } from 'lucide-react';
 
-interface AboutProps {
-  onOpenResume?: () => void;
-}
-
-export default function About({ onOpenResume }: AboutProps) {
-  const cardData = [
-    {
-      icon: <Code className="text-purple-400" size={24} />,
-      title: 'Full Stack Development',
-      description: 'Building beautiful frontends with React & TypeScript, and robust backends using Node.js & Express.',
-    },
-    {
-      icon: <Database className="text-blue-400" size={24} />,
-      title: 'Database & Systems',
-      description: 'Designing efficient database schemas using PostgreSQL, Supabase, and MySQL for secure data persistence.',
-    },
-    {
-      icon: <Globe className="text-purple-400" size={24} />,
-      title: 'Scalable Solutions',
-      description: 'Creating maintainable, performant web architectures and automating workflows to solve real-world problems.',
-    },
-  ];
-
+export default function About() {
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-transparent">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="about" className="py-24 relative overflow-hidden bg-transparent border-t border-[#242A33]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* Section Heading */}
-        <div className="text-center mb-16">
+        <div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold uppercase tracking-wider text-purple-400 mb-3"
+            className="flex items-center gap-2 text-xs font-mono text-purple-400 tracking-widest uppercase mb-3"
           >
-            <User size={12} />
-            About Me
+            <User size={14} />
+            <span>02 / ABOUT ME</span>
           </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-extrabold tracking-tight font-display text-white"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display text-white"
           >
-            My Background & Passion
+            Engineering Story &amp; Background
           </motion.h2>
         </div>
 
-        {/* Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Asymmetric Split Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Narrative bio */}
+          {/* Left Column - Personal Narrative */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-6"
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-7 space-y-6 text-[#8B95A5] text-base leading-relaxed font-sans"
           >
-            <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 shadow-xl space-y-4">
-              <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
-                Sanjay S
-              </h3>
-              <p className="text-zinc-300 leading-relaxed text-sm sm:text-base">
-                I am an <strong className="text-purple-400 font-semibold">Information Technology student</strong> passionate about software engineering and full-stack development. I enjoy taking on complex programming tasks and translating them into elegant, robust, and clean applications.
-              </p>
-              <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">
-                My technical experience includes working closely with <strong className="text-white font-medium">React, TypeScript, Node.js, Supabase, and PostgreSQL</strong>. I am always exploring modern web architectures, API design principles, and deployment workflows to create seamless user experiences.
-              </p>
-              <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">
-                Aside from coding, I focus on system efficiency, code optimization, and understanding the core fundamentals of computing. My ultimate objective is to contribute to scalable applications and help solve real-world problems.
-              </p>
+            <p>
+              I am an <strong className="text-white font-semibold">Information Technology undergraduate (B.Tech 2023–2027)</strong> at St. Peter's College of Engineering and Technology, Chennai, with a passion for software engineering, full-stack systems, and infrastructure automation.
+            </p>
+            <p>
+              My engineering journey focuses on turning complex workflows into clean, reliable web applications. Whether building a full-stack academic evaluation platform with isolated Docker runtimes (<strong className="text-purple-300">Lab Record System</strong>) or designing container management dashboards (<strong className="text-blue-300">OpsPilot</strong>), I prioritize clean code architecture, normalized relational databases, and maintainable REST API endpoints.
+            </p>
+            <p>
+              I actively bridge computer science fundamentals—Data Structures &amp; Algorithms, Object-Oriented Programming, and Relational Database Systems—with modern developer tooling to ship functional, real-world solutions.
+            </p>
+          </motion.div>
 
-              <div className="pt-2">
-                <button
-                  onClick={onOpenResume}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-600/20 border border-purple-500/30 hover:bg-purple-600/30 text-purple-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
-                >
-                  <FileText size={16} />
-                  <span>Preview Full Resume</span>
-                </button>
+          {/* Right Column - Competency Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-5 space-y-4"
+          >
+            <div className="editorial-panel p-6 space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[#07090D] border border-[#242A33] text-purple-400">
+                  <Code2 size={20} />
+                </div>
+                <h3 className="font-display font-bold text-white text-base">Full-Stack Development</h3>
               </div>
+              <p className="text-xs text-[#8B95A5] leading-relaxed">
+                Building responsive frontends with React &amp; TypeScript paired with modular Node.js/Express and Python/FastAPI backends.
+              </p>
+            </div>
+
+            <div className="editorial-panel p-6 space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[#07090D] border border-[#242A33] text-blue-400">
+                  <Database size={20} />
+                </div>
+                <h3 className="font-display font-bold text-white text-base">Databases &amp; Storage</h3>
+              </div>
+              <p className="text-xs text-[#8B95A5] leading-relaxed">
+                Designing normalized relational database schemas in PostgreSQL, MySQL, and Supabase with optimized queries.
+              </p>
+            </div>
+
+            <div className="editorial-panel p-6 space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-[#07090D] border border-[#242A33] text-cyan-400">
+                  <Terminal size={20} />
+                </div>
+                <h3 className="font-display font-bold text-white text-base">DevOps &amp; Containerization</h3>
+              </div>
+              <p className="text-xs text-[#8B95A5] leading-relaxed">
+                Utilizing Docker, Docker Compose, and SDK automation for isolated code execution and predictable deployments.
+              </p>
             </div>
           </motion.div>
 
-          {/* Core Focus Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 space-y-4"
-          >
-            {cardData.map((card, index) => (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.15 }}
-                whileHover={{ scale: 1.02 }}
-                className="p-5 rounded-xl glass-panel border border-white/5 hover:border-purple-500/20 transition-all shadow-md flex gap-4"
-              >
-                <div className="flex-shrink-0 p-3 rounded-lg bg-zinc-900 border border-white/5 h-fit">
-                  {card.icon}
-                </div>
-                <div className="space-y-1">
-                  <h4 className="font-semibold text-white font-display text-sm sm:text-base">
-                    {card.title}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                    {card.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
         </div>
+
       </div>
     </section>
   );
