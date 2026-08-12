@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Code2, FileText } from 'lucide-react';
+import SpecularButton from './reactbits/SpecularButton';
 
 interface NavLink {
   name: string;
@@ -92,28 +93,47 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
               );
             })}
 
-            {/* Resume Trigger Button */}
-            <button
+            {/* Resume Trigger Specular Button */}
+            <SpecularButton
+              size="sm"
+              radius={999}
+              tint="#a855f7"
+              tintOpacity={0.15}
+              blur={12}
+              textColor="#e9d5ff"
+              lineColor="#c084fc"
+              baseColor="#581c87"
+              intensity={1.3}
+              thickness={1.2}
               onClick={onOpenResume}
-              className="ml-2 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
+              className="ml-2"
             >
               <FileText size={14} />
               <span>Resume</span>
-            </button>
+            </SpecularButton>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
-            <button
+            <SpecularButton
+              size="sm"
+              radius={999}
+              tint="#a855f7"
+              tintOpacity={0.15}
+              blur={12}
+              textColor="#e9d5ff"
+              lineColor="#c084fc"
+              baseColor="#581c87"
+              intensity={1.3}
+              thickness={1.2}
               onClick={onOpenResume}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-semibold"
             >
-              <FileText size={13} />
+              <FileText size={14} />
               <span>Resume</span>
-            </button>
+            </SpecularButton>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 border border-zinc-800/30 transition-colors"
+              className="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 border border-zinc-800/30 transition-colors cursor-pointer"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}

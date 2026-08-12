@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { FileText, ArrowDown, Code2, Sparkles, Terminal, Layers } from 'lucide-react';
 import { Github, Linkedin } from './icons';
+import SpecularButton from './reactbits/SpecularButton';
+
 interface HeroProps {
   onOpenResume?: () => void;
 }
@@ -69,52 +71,105 @@ export default function Hero({ onOpenResume }: HeroProps) {
             Information Technology undergraduate specializing in full-stack web applications, AI-assisted tools, and containerized DevOps infrastructure.
           </motion.p>
 
-          {/* Action CTAs - Pro Level Buttons */}
+          {/* Action CTAs - React Bits Specular Buttons */}
           <motion.div
             variants={itemVariants}
             className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 pt-4"
           >
-            {/* View Resume Button - Pro Level Primary */}
-            <button
+            {/* View Resume Specular Button */}
+            <SpecularButton
+              size="lg"
+              radius={14}
+              tint="#a855f7"
+              tintOpacity={0.2}
+              blur={16}
+              textColor="#ffffff"
+              lineColor="#a855f7"
+              baseColor="#3b82f6"
+              intensity={1.5}
+              shineSize={12}
+              shineFade={45}
+              thickness={1.5}
+              speed={0.4}
+              followMouse={true}
+              proximity={300}
+              autoAnimate={true}
               onClick={onOpenResume}
-              className="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none cursor-pointer w-full sm:w-auto shadow-xl shadow-purple-500/20"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-600 rounded-xl group-hover:opacity-100 transition-opacity duration-300 animate-pulse-slow" />
-              <div className="relative inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-zinc-950/90 rounded-xl text-white font-semibold text-sm backdrop-blur-xl group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-300">
-                <FileText size={18} className="text-purple-400 group-hover:text-white group-hover:scale-110 transition-transform duration-300" />
-                <span>Preview Resume</span>
-              </div>
-            </button>
+              <FileText size={18} className="text-purple-300" />
+              <span>Preview Resume</span>
+            </SpecularButton>
 
-            {/* Explore Projects Button - Pro Level Secondary */}
-            <a
-              href="#projects"
-              className="relative group rounded-xl px-6 py-3.5 bg-zinc-900/80 hover:bg-zinc-800/90 border border-white/10 hover:border-purple-500/40 text-white font-medium text-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 shadow-lg flex items-center justify-center gap-2.5 w-full sm:w-auto"
-            >
-              <Terminal size={18} className="text-purple-400 group-hover:text-purple-300 group-hover:rotate-6 transition-transform duration-300" />
-              <span>Explore Projects</span>
+            {/* Explore Projects Specular Button */}
+            <a href="#projects">
+              <SpecularButton
+                size="lg"
+                radius={14}
+                tint="#18181b"
+                tintOpacity={0.4}
+                blur={16}
+                textColor="#ffffff"
+                lineColor="#ffffff"
+                baseColor="#3f3f46"
+                intensity={1.2}
+                shineSize={10}
+                shineFade={40}
+                thickness={1}
+                speed={0.35}
+                followMouse={true}
+                proximity={250}
+              >
+                <Terminal size={18} className="text-purple-400" />
+                <span>Explore Projects</span>
+              </SpecularButton>
             </a>
 
-            {/* GitHub Button - Pro Level Social */}
-            <a
-              href="https://github.com/Sanjayshaa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative group rounded-xl px-5 py-3.5 bg-zinc-900/80 hover:bg-zinc-800/90 border border-white/10 hover:border-purple-500/40 text-white font-medium text-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto"
-            >
-              <Github size={18} className="group-hover:scale-110 transition-transform duration-300" />
-              <span>GitHub</span>
+            {/* GitHub Specular Button */}
+            <a href="https://github.com/Sanjayshaa" target="_blank" rel="noopener noreferrer">
+              <SpecularButton
+                size="lg"
+                radius={14}
+                tint="#18181b"
+                tintOpacity={0.4}
+                blur={16}
+                textColor="#ffffff"
+                lineColor="#c084fc"
+                baseColor="#27272a"
+                intensity={1.2}
+                shineSize={10}
+                shineFade={40}
+                thickness={1}
+                speed={0.35}
+                followMouse={true}
+                proximity={250}
+              >
+                <Github size={18} />
+                <span>GitHub</span>
+              </SpecularButton>
             </a>
 
-            {/* LinkedIn Button - Pro Level Social */}
-            <a
-              href="https://www.linkedin.com/in/sanjay-s16/" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative group rounded-xl px-5 py-3.5 bg-zinc-900/80 hover:bg-zinc-800/90 border border-white/10 hover:border-blue-500/40 text-white font-medium text-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto"
-            >
-              <Linkedin size={18} className="text-blue-400 group-hover:text-white group-hover:scale-110 transition-transform duration-300" />
-              <span>LinkedIn</span>
+            {/* LinkedIn Specular Button */}
+            <a href="https://www.linkedin.com/in/sanjay-s16/" target="_blank" rel="noopener noreferrer">
+              <SpecularButton
+                size="lg"
+                radius={14}
+                tint="#18181b"
+                tintOpacity={0.4}
+                blur={16}
+                textColor="#ffffff"
+                lineColor="#38bdf8"
+                baseColor="#27272a"
+                intensity={1.2}
+                shineSize={10}
+                shineFade={40}
+                thickness={1}
+                speed={0.35}
+                followMouse={true}
+                proximity={250}
+              >
+                <Linkedin size={18} className="text-blue-400" />
+                <span>LinkedIn</span>
+              </SpecularButton>
             </a>
           </motion.div>
 
