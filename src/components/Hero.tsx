@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { FileText, Terminal, ArrowUpRight, Cpu } from 'lucide-react';
+import { FileText, Terminal, ArrowUpRight } from 'lucide-react';
 import { Github } from './icons';
 import SpecularButton from './reactbits/SpecularButton';
+import EngineerCard from './EngineerCard';
 
 interface HeroProps {
   onOpenResume?: () => void;
@@ -126,78 +127,12 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
           </div>
 
-          {/* Right Column - Live Engineering Profile Panel */}
+          {/* Right Column - Dynamic 3D Interactive Engineer Profile Card */}
           <motion.div
             variants={itemVariants}
             className="lg:col-span-5"
           >
-            <div className="editorial-panel p-6 sm:p-8 space-y-6 relative overflow-hidden">
-              {/* Top Accent Line */}
-              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500" />
-
-              {/* Panel Header */}
-              <div className="flex items-center justify-between border-b border-[#242A33] pb-4">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-[#07090D] border border-[#242A33] text-purple-400">
-                    <Cpu size={18} />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-bold text-white text-base tracking-tight">SANJAY S</h3>
-                    <p className="font-mono text-[11px] text-[#8B95A5] uppercase tracking-wider">ENGINEER PROFILE</p>
-                  </div>
-                </div>
-                <span className="font-mono text-xs text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded border border-purple-500/20">
-                  2023 — 2027
-                </span>
-              </div>
-
-              {/* Focus Areas */}
-              <div className="space-y-2">
-                <span className="font-mono text-[11px] text-[#8B95A5] uppercase tracking-widest block font-semibold">
-                  CURRENT FOCUS
-                </span>
-                <div className="space-y-1.5 text-xs text-zinc-300 font-sans">
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-purple-400" />
-                    <span>Full-Stack Application Development</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-                    <span>Backend REST APIs &amp; Relational Datastores</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-                    <span>DevOps &amp; Docker Container Orchestration</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Primary Tech Stack */}
-              <div className="space-y-2 pt-2 border-t border-[#242A33]">
-                <span className="font-mono text-[11px] text-[#8B95A5] uppercase tracking-widest block font-semibold">
-                  CORE TECH STACK
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {['React', 'Node.js', 'Express', 'Python', 'FastAPI', 'PostgreSQL', 'Docker', 'Supabase'].map((tech) => (
-                    <span key={tech} className="px-2.5 py-1 rounded bg-[#07090D] border border-[#242A33] font-mono text-[11px] text-zinc-300">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Status */}
-              <div className="pt-2 border-t border-[#242A33] flex items-center justify-between">
-                <span className="font-mono text-[11px] text-[#8B95A5] uppercase tracking-widest font-semibold">
-                  STATUS
-                </span>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Available for Opportunities</span>
-                </div>
-              </div>
-
-            </div>
+            <EngineerCard />
           </motion.div>
 
         </motion.div>
