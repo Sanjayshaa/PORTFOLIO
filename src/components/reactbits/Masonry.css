@@ -1,0 +1,104 @@
+.masonry-list {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+}
+
+.masonry-item-wrapper {
+  position: absolute;
+  will-change: transform, width, height, opacity;
+  padding: 10px;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+}
+
+.masonry-item-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #242A33;
+  background-color: #0D1117;
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.masonry-item-card:hover {
+  border-color: rgba(167, 139, 250, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(167, 139, 250, 0.2);
+}
+
+.masonry-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(7, 9, 13, 0.95) 0%, rgba(7, 9, 13, 0.6) 60%, rgba(7, 9, 13, 0.1) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, background 0.3s ease;
+}
+
+.masonry-item-card:hover .masonry-overlay {
+  opacity: 1;
+  background: linear-gradient(to top, rgba(7, 9, 13, 0.98) 0%, rgba(7, 9, 13, 0.75) 50%, rgba(7, 9, 13, 0.3) 100%);
+}
+
+.masonry-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #A78BFA;
+  background: rgba(7, 9, 13, 0.8);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  align-self: flex-start;
+}
+
+.masonry-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.masonry-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #F5F7FA;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.masonry-category {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #8B95A5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.masonry-action {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #A78BFA;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.masonry-item-card:hover .masonry-action {
+  transform: translateX(4px);
+  color: #FFFFFF;
+}

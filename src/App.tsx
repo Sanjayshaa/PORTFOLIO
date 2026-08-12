@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import Principles from './components/Principles';
@@ -11,6 +10,9 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
 import CaseStudyModal from './components/CaseStudyModal';
+
+import StaggeredMenu from './components/reactbits/StaggeredMenu';
+import SplashCursor from './components/reactbits/SplashCursor';
 import MoltenMetal from './components/reactbits/MoltenMetal';
 
 function App() {
@@ -23,11 +25,38 @@ function App() {
   const handleOpenCaseStudy = () => setIsCaseStudyOpen(true);
   const handleCloseCaseStudy = () => setIsCaseStudyOpen(false);
 
+  const menuItems = [
+    { label: 'Home', link: '#hero', ariaLabel: 'Go to Hero' },
+    { label: 'Work', link: '#projects', ariaLabel: 'View Selected Work' },
+    { label: 'About', link: '#about', ariaLabel: 'Learn About Me' },
+    { label: 'Skills', link: '#skills', ariaLabel: 'View Technical Skills' },
+    { label: 'Experience', link: '#education', ariaLabel: 'View Education & Timeline' },
+    { label: 'Contact', link: '#contact', ariaLabel: 'Get in Touch' },
+  ];
+
+  const socialItems = [
+    { label: 'GitHub ↗', link: 'https://github.com/Sanjayshaa' },
+    { label: 'LinkedIn ↗', link: 'https://www.linkedin.com/in/sanjay-s16/' },
+    { label: 'Email ↗', link: 'mailto:sanjaysha9468@gmail.com' },
+  ];
+
   return (
     <div className="relative min-h-screen bg-[#07090D] text-[#F5F7FA] overflow-hidden font-sans selection:bg-purple-500/30 selection:text-white">
       
-      {/* React Bits Component: Ultra-Subtle Liquid Chrome Background Shader */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
+      {/* React Bits Component: Subtle Ambient SplashCursor */}
+      <SplashCursor
+        SIM_RESOLUTION={64}
+        DYE_RESOLUTION={256}
+        DENSITY_DISSIPATION={3.5}
+        VELOCITY_DISSIPATION={2.0}
+        PRESSURE={0.8}
+        SPLAT_RADIUS={0.12}
+        SPLAT_FORCE={3000}
+        TRANSPARENT={true}
+      />
+
+      {/* React Bits Component: Subtle Chrome Background Shader */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-30">
         <MoltenMetal
           color1="#000000"
           color2="#ffffff"
@@ -46,23 +75,51 @@ function App() {
           grainIntensity={0.03}
           mouseInteraction={true}
           mouseStrength={0.3}
-          opacity={0.8}
+          opacity={0.7}
         />
       </div>
 
-      {/* Editorial Navigation */}
-      <Navbar onOpenResume={handleOpenResume} />
+      {/* React Bits Component: Primary Navigation StaggeredMenu */}
+      <StaggeredMenu
+        position="right"
+        items={menuItems}
+        socialItems={socialItems}
+        displaySocials={true}
+        displayItemNumbering={true}
+        isFixed={true}
+        closeOnClickAway={true}
+        colors={['#07090D', '#161B22', '#21262D']}
+        menuButtonColor="#F5F7FA"
+        openMenuButtonColor="#A78BFA"
+        accentColor="#A78BFA"
+      />
       
-      {/* Page Sections */}
-      <main className="relative z-10">
-        <Hero onOpenResume={handleOpenResume} />
-        <Projects onOpenCaseStudy={handleOpenCaseStudy} />
-        <Principles />
-        <Skills />
-        <About />
-        <Education />
-        <GitHub />
-        <Contact onOpenResume={handleOpenResume} />
+      {/* Main Sections */}
+      <main className="relative z-10 pt-16">
+        <div id="hero">
+          <Hero onOpenResume={handleOpenResume} />
+        </div>
+        <div id="projects">
+          <Projects onOpenCaseStudy={handleOpenCaseStudy} />
+        </div>
+        <div id="principles">
+          <Principles />
+        </div>
+        <div id="skills">
+          <Skills />
+        </div>
+        <div id="about">
+          <About />
+        </div>
+        <div id="education">
+          <Education />
+        </div>
+        <div id="github">
+          <GitHub />
+        </div>
+        <div id="contact">
+          <Contact onOpenResume={handleOpenResume} />
+        </div>
       </main>
 
       {/* Footer */}
