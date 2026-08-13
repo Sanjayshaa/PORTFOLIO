@@ -29,18 +29,19 @@ export default function Hero({ onOpenResume }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center pt-24 pb-16 overflow-hidden bg-transparent">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+    <section className="relative min-h-[calc(100vh-80px)] w-full flex items-center justify-center pt-24 pb-16 overflow-hidden bg-transparent">
+      {/* Full-width wide container (min(94vw, 1600px)) */}
+      <div className="w-[min(94vw,1600px)] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center"
+          className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] gap-10 lg:gap-16 items-center"
         >
           
-          {/* Left Column - Headline, Narrative & Fixed Horizontal CTA Row */}
-          <div className="lg:col-span-7 space-y-7 text-left">
+          {/* Left Column - Headline, Narrative & Fixed 1-Row CTA Layout */}
+          <div className="space-y-8 text-left">
             
             {/* Tagline Badge */}
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2 font-mono text-xs text-[#A78BFA] tracking-widest uppercase font-semibold">
@@ -51,31 +52,31 @@ export default function Hero({ onOpenResume }: HeroProps) {
             {/* Big Headline */}
             <motion.h1
               variants={itemVariants}
-              className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.08]"
+              className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.06]"
             >
               I build software systems <br />
               <span className="text-gradient">that solve real problems.</span>
             </motion.h1>
 
-            {/* Concise Supporting Statement */}
+            {/* Concise Supporting Description */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-[#8B95A5] max-w-xl leading-relaxed font-sans"
+              className="text-base sm:text-lg text-[#8B95A5] max-w-2xl leading-relaxed font-sans"
             >
               Information Technology undergraduate with practical experience across full-stack web applications, backend REST APIs, relational datastores, and Docker containerized infrastructure.
             </motion.p>
 
-            {/* FIXED CTA BUTTONS — STRICTLY ONE HORIZONTAL ROW ON DESKTOP */}
+            {/* CTA BUTTONS — STRICTLY ONE HORIZONTAL ROW ON DESKTOP */}
             <motion.div
               variants={itemVariants}
               className="pt-2 w-full"
             >
-              <div className="flex flex-col sm:flex-row lg:flex-nowrap items-stretch sm:items-center gap-3 w-full max-w-full">
+              <div className="flex flex-col sm:flex-row lg:flex-nowrap items-stretch sm:items-center gap-3.5 w-full">
                 
                 {/* 1. PRIMARY: VIEW WORK */}
                 <a
                   href="#projects"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors shadow-lg shadow-purple-500/25 whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors shadow-lg shadow-purple-500/25 whitespace-nowrap cursor-pointer"
                 >
                   <Terminal size={16} />
                   <span>VIEW WORK</span>
@@ -84,7 +85,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
                 {/* 2. SECONDARY: CONTACT ME */}
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <span>CONTACT ME</span>
                 </a>
@@ -94,7 +95,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
                   href="https://github.com/Sanjayshaa"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-3.5 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-[#8B95A5] hover:text-white font-mono text-xs font-semibold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center justify-center gap-1.5 px-5 py-4 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-[#8B95A5] hover:text-white font-mono text-xs font-semibold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <Github size={16} />
                   <span>GITHUB</span>
@@ -104,7 +105,7 @@ export default function Hero({ onOpenResume }: HeroProps) {
                 {/* 4. TERTIARY: RESUME */}
                 <button
                   onClick={onOpenResume}
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-3.5 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-[#8B95A5] hover:text-white font-mono text-xs font-semibold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center justify-center gap-1.5 px-5 py-4 rounded-xl border border-[#242A33] hover:border-purple-500/40 bg-[#0D1117] hover:bg-[#161B22] text-[#8B95A5] hover:text-white font-mono text-xs font-semibold tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
                   type="button"
                 >
                   <FileText size={16} className="text-[#A78BFA]" />
@@ -116,80 +117,80 @@ export default function Hero({ onOpenResume }: HeroProps) {
 
           </div>
 
-          {/* Right Column - Purposeful System Architecture Visual (Option A / B) */}
+          {/* Right Column - Purposeful System Architecture Visual */}
           <motion.div
             variants={itemVariants}
-            className="lg:col-span-5"
+            className="w-full"
           >
-            <div className="relative rounded-2xl bg-[#0D1117] border border-[#242A33] p-6 space-y-5 overflow-hidden shadow-2xl backdrop-blur-xl">
+            <div className="relative rounded-2xl bg-[#0D1117] border border-[#242A33] p-7 space-y-6 overflow-hidden shadow-2xl backdrop-blur-xl">
               
               {/* Top Accent Line */}
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500" />
 
               {/* Panel Header */}
-              <div className="flex items-center justify-between border-b border-[#242A33] pb-3.5">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-[#07090D] border border-[#242A33] text-[#A78BFA]">
-                    <Cpu size={18} />
+              <div className="flex items-center justify-between border-b border-[#242A33] pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-xl bg-[#07090D] border border-[#242A33] text-[#A78BFA]">
+                    <Cpu size={20} />
                   </div>
                   <div>
-                    <h3 className="font-mono font-bold text-white text-xs uppercase tracking-wider">SYSTEM ARCHITECTURE</h3>
-                    <p className="font-mono text-[11px] text-[#8B95A5]">Digital Lab Evaluation Pipeline</p>
+                    <h3 className="font-mono font-bold text-white text-sm uppercase tracking-wider">SYSTEM ARCHITECTURE</h3>
+                    <p className="font-mono text-xs text-[#8B95A5]">Digital Lab Evaluation Pipeline</p>
                   </div>
                 </div>
-                <span className="font-mono text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-mono text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span>ACTIVE RUNTIME</span>
                 </span>
               </div>
 
-              {/* Architecture Flow Diagram (Frontend → API → Database → Docker Sandbox) */}
-              <div className="space-y-2.5 font-mono text-xs">
+              {/* Architecture Flow Diagram */}
+              <div className="space-y-3 font-mono text-xs sm:text-sm">
                 
                 {/* Step 1: Frontend */}
-                <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
+                <div className="p-3.5 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <span className="h-2 w-2 rounded-full bg-purple-400" />
                     <span className="font-bold text-white">01 / FRONTEND</span>
                   </div>
-                  <span className="text-[11px] text-[#8B95A5]">React · TypeScript · Vite</span>
+                  <span className="text-xs text-[#8B95A5]">React · TypeScript · Vite</span>
                 </div>
 
                 {/* Connection Arrow */}
-                <div className="flex justify-center text-[#8B95A5] text-[10px]">↓ HTTP / REST API Request</div>
+                <div className="flex justify-center text-[#8B95A5] text-xs font-mono">↓ HTTP / REST API Request</div>
 
                 {/* Step 2: Backend API */}
-                <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
+                <div className="p-3.5 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <span className="h-2 w-2 rounded-full bg-blue-400" />
                     <span className="font-bold text-white">02 / BACKEND API</span>
                   </div>
-                  <span className="text-[11px] text-[#8B95A5]">Node.js · Express / FastAPI</span>
+                  <span className="text-xs text-[#8B95A5]">Node.js · Express / FastAPI</span>
                 </div>
 
                 {/* Connection Arrow */}
-                <div className="flex justify-center text-[#8B95A5] text-[10px]">↓ ORM / Datastore Queries</div>
+                <div className="flex justify-center text-[#8B95A5] text-xs font-mono">↓ ORM / Datastore Queries</div>
 
                 {/* Step 3: Database */}
-                <div className="p-3 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
+                <div className="p-3.5 rounded-xl bg-[#07090D] border border-[#242A33] flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <span className="h-2 w-2 rounded-full bg-emerald-400" />
                     <span className="font-bold text-white">03 / DATASTORE</span>
                   </div>
-                  <span className="text-[11px] text-[#8B95A5]">PostgreSQL / Supabase</span>
+                  <span className="text-xs text-[#8B95A5]">PostgreSQL / Supabase</span>
                 </div>
 
                 {/* Connection Arrow */}
-                <div className="flex justify-center text-[#8B95A5] text-[10px]">↓ Isolated Container Execution</div>
+                <div className="flex justify-center text-[#8B95A5] text-xs font-mono">↓ Isolated Container Execution</div>
 
                 {/* Step 4: Docker Execution Engine */}
-                <div className="p-3 rounded-xl bg-[#07090D] border border-cyan-500/30 flex items-center justify-between bg-cyan-500/5">
+                <div className="p-3.5 rounded-xl bg-[#07090D] border border-cyan-500/30 flex items-center justify-between bg-cyan-500/5">
                   <div className="flex items-center gap-2.5">
-                    <Container size={14} className="text-cyan-400" />
+                    <Container size={16} className="text-cyan-400" />
                     <span className="font-bold text-cyan-300">04 / DOCKER EXECUTION</span>
                   </div>
-                  <span className="text-[11px] text-cyan-400 flex items-center gap-1 font-semibold">
-                    <CheckCircle2 size={12} />
+                  <span className="text-xs text-cyan-400 flex items-center gap-1.5 font-semibold">
+                    <CheckCircle2 size={14} />
                     <span>Isolated Code Sandbox</span>
                   </span>
                 </div>

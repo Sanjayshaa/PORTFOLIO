@@ -42,7 +42,7 @@ export default function Contact({ onOpenResume }: ContactProps) {
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden bg-transparent">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+      <div className="w-[min(94vw,1600px)] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-12">
         
         {/* Editorial Heading */}
         <div className="text-center max-w-3xl mx-auto space-y-4">

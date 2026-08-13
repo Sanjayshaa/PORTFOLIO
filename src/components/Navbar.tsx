@@ -1,14 +1,51 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Code2, FileText } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { Code2, FileText, ArrowUpRight } from 'lucide-react';
+import { Github } from './icons';
 import './Navbar.css';
 
 interface NavbarProps {
   onOpenResume?: () => void;
 }
 
+function MagneticNavItem({
+  href,
+  label,
+  isActive,
+  mouseX,
+}: {
+  href: string;
+  label: string;
+  isActive: boolean;
+  mouseX: any;
+}) {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  const mouseDistance = useTransform(mouseX, (val: number) => {
+    const rect = ref.current?.getBoundingClientRect() ?? { x: 0, width: 60 };
+    return val - rect.x - rect.width / 2;
+  });
+
+  const scale = useSpring(
+    useTransform(mouseDistance, [-120, 0, 120], [1, 1.15, 1]),
+    { mass: 0.1, stiffness: 150, damping: 12 }
+  );
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      style={{ scale }}
+      className={`top-nav-item ${isActive ? 'active' : ''}`}
+    >
+      <span>{label}</span>
+    </motion.a>
+  );
+}
+
 export default function Navbar({ onOpenResume }: NavbarProps) {
   const [activeSection, setActiveSection] = useState('hero');
+  const mouseX = useMotionValue(Infinity);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,17 +70,17 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
   }, []);
 
   const navItems = [
-    { label: 'Work', href: '#projects', id: 'projects' },
-    { label: 'About', href: '#about', id: 'about' },
-    { label: 'Skills', href: '#skills', id: 'skills' },
-    { label: 'Education', href: '#education', id: 'education' },
-    { label: 'GitHub ↗', href: '#github', id: 'github' },
-    { label: 'Contact', href: '#contact', id: 'id: contact' },
+    { label: 'WORK', href: '#projects', id: 'projects' },
+    { label: 'ABOUT', href: '#about', id: 'about' },
+    { label: 'SKILLS', href: '#skills', id: 'skills' },
+    { label: 'EDUCATION', href: '#education', id: 'education' },
   ];
 
   return (
     <div className="top-nav-wrapper">
       <motion.nav
+        onMouseMove={({ clientX }) => mouseX.set(clientX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -58,31 +95,48 @@ export default function Navbar({ onOpenResume }: NavbarProps) {
           <span>SANJAY<span className="text-[#A78BFA]">.S</span></span>
         </a>
 
-        {/* Desktop Nav Items */}
+        {/* Desktop Magnetic Nav Items */}
         <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => {
-            const isActive = activeSection === item.id;
-            return (
-              <a
-                key={item.label}
-                href={item.href}
-                className={`top-nav-item ${isActive ? 'active' : ''}`}
-              >
-                <span>{item.label}</span>
-              </a>
-            );
-          })}
+          {navItems.map((item) => (
+            <MagneticNavItem
+              key={item.label}
+              href={item.href}
+              label={item.label}
+              isActive={activeSection === item.id}
+              mouseX={mouseX}
+            />
+          ))}
         </div>
 
-        {/* Resume Trigger CTA */}
-        <button
-          onClick={onOpenResume}
-          className="top-nav-resume-btn ml-1"
-          type="button"
-        >
-          <FileText size={14} />
-          <span>Resume</span>
-        </button>
+        {/* Right Side Utility Actions */}
+        <div className="flex items-center gap-1.5 pl-2 border-l border-[#242A33]">
+          <a
+            href="https://github.com/Sanjayshaa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-mono text-[#8B95A5] hover:text-white transition-colors"
+          >
+            <Github size={14} />
+            <span>GITHUB</span>
+            <ArrowUpRight size={12} />
+          </a>
+
+          <a
+            href="#contact"
+            className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-mono text-[#8B95A5] hover:text-white transition-colors"
+          >
+            <span>CONTACT</span>
+          </a>
+
+          <button
+            onClick={onOpenResume}
+            className="top-nav-resume-btn"
+            type="button"
+          >
+            <FileText size={13} />
+            <span>RESUME</span>
+          </button>
+        </div>
       </motion.nav>
     </div>
   );

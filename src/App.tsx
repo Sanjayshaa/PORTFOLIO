@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { Home, FolderGit2, User, Cpu, GraduationCap, Mail, FileText } from 'lucide-react';
-import { Github } from './components/icons';
-
+import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import Principles from './components/Principles';
@@ -14,7 +12,6 @@ import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
 import CaseStudyModal from './components/CaseStudyModal';
 
-import Dock, { type DockItemData } from './components/reactbits/Dock';
 import StaggeredMenu from './components/reactbits/StaggeredMenu';
 import SplashCursor from './components/reactbits/SplashCursor';
 import MoltenMetal from './components/reactbits/MoltenMetal';
@@ -35,7 +32,7 @@ function App() {
     { label: 'Work', link: '#projects', ariaLabel: 'View Selected Work' },
     { label: 'About', link: '#about', ariaLabel: 'Learn About Me' },
     { label: 'Skills', link: '#skills', ariaLabel: 'View Technical Capabilities' },
-    { label: 'Experience', link: '#education', ariaLabel: 'View Education & Timeline' },
+    { label: 'Education', link: '#education', ariaLabel: 'View Education & Timeline' },
     { label: 'Contact', link: '#contact', ariaLabel: 'Get in Touch' },
   ];
 
@@ -43,18 +40,6 @@ function App() {
     { label: 'GitHub ↗', link: 'https://github.com/Sanjayshaa' },
     { label: 'LinkedIn ↗', link: 'https://www.linkedin.com/in/sanjay-s16/' },
     { label: 'Email ↗', link: 'mailto:sanjaysha9468@gmail.com' },
-  ];
-
-  // React Bits Dock Navigation Items
-  const dockItems: DockItemData[] = [
-    { icon: <Home size={18} />, label: 'Home', href: '#hero' },
-    { icon: <FolderGit2 size={18} />, label: 'Work', href: '#projects' },
-    { icon: <User size={18} />, label: 'About', href: '#about' },
-    { icon: <Cpu size={18} />, label: 'Skills', href: '#skills' },
-    { icon: <GraduationCap size={18} />, label: 'Education', href: '#education' },
-    { icon: <Github size={18} />, label: 'GitHub', href: '#github' },
-    { icon: <Mail size={18} />, label: 'Contact', href: '#contact' },
-    { icon: <FileText size={18} className="text-[#A78BFA]" />, label: 'Resume', onClick: handleOpenResume },
   ];
 
   return (
@@ -87,6 +72,9 @@ function App() {
         />
       </div>
 
+      {/* Top Magnetic Navigation Bar */}
+      <Navbar onOpenResume={handleOpenResume} />
+
       {/* React Bits Component: Primary Navigation StaggeredMenu Header */}
       <StaggeredMenu
         position="right"
@@ -101,17 +89,8 @@ function App() {
         openMenuButtonColor="#A78BFA"
         accentColor="#A78BFA"
       />
-
-      {/* React Bits Component: Fixed Dock Navigation Bar */}
-      <Dock
-        items={dockItems}
-        panelHeight={60}
-        baseItemSize={42}
-        magnification={64}
-        distance={180}
-      />
       
-      {/* Main Sections - Continuous Flow without Full-Width Divider Lines */}
+      {/* Main Sections - Wide Full-Screen Canvas System */}
       <main className="relative z-10 pt-16">
         <div id="hero">
           <Hero onOpenResume={handleOpenResume} />

@@ -32,7 +32,7 @@ const educationData: EducationItem[] = [
 export default function Education() {
   return (
     <section id="education" className="py-20 relative overflow-hidden bg-transparent">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+      <div className="w-[min(94vw,1600px)] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-12">
         
         {/* Section Heading */}
         <div>
@@ -67,23 +67,18 @@ export default function Education() {
           </motion.p>
         </div>
 
-        {/* Editorial Timeline */}
-        <div className="relative border-l border-[#242A33] ml-4 sm:ml-6 space-y-10 pl-6 sm:pl-10">
+        {/* Wide Desktop Editorial Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {educationData.map((item, idx) => (
             <motion.div
               key={item.degree}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.15 }}
-              className="relative group"
+              className="p-7 sm:p-8 rounded-2xl bg-[#0D1117] border border-[#242A33] hover:border-purple-500/40 transition-all duration-300 space-y-4 flex flex-col justify-between group"
             >
-              {/* Timeline Dot */}
-              <div className={`absolute -left-[31px] sm:-left-[47px] top-1.5 h-4 w-4 rounded-full border-2 bg-[#07090D] transition-colors ${
-                item.current ? 'border-purple-500 bg-purple-500/20' : 'border-[#242A33] group-hover:border-purple-400'
-              }`} />
-
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#0D1117] border border-[#242A33] group-hover:border-purple-500/40 transition-all duration-300 space-y-3">
+              <div className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#242A33] pb-3">
                   <span className="font-mono text-xs font-bold text-[#A78BFA] tracking-wider uppercase flex items-center gap-1.5">
                     <Calendar size={13} />
@@ -102,7 +97,7 @@ export default function Education() {
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="font-display font-extrabold text-white text-xl tracking-tight">
+                  <h3 className="font-display font-extrabold text-white text-xl tracking-tight group-hover:text-purple-300 transition-colors">
                     {item.degree}
                   </h3>
                   <p className="font-mono text-sm text-purple-300/90 font-medium">
