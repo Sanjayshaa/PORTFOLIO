@@ -11,7 +11,12 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   if (!isOpen) return null;
 
   const handlePrint = () => {
+    const originalTitle = document.title;
+    document.title = 'Sanjay S — Resume';
     window.print();
+    setTimeout(() => {
+      document.title = originalTitle;
+    }, 500);
   };
 
   return (
