@@ -48,14 +48,26 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               </h3>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <a
+                href="/Sanjay_S_Resume.pdf"
+                download="Sanjay_S_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition-all shadow-md hover:shadow-purple-500/25 cursor-pointer"
+                title="Download PDF Resume"
+              >
+                <Download size={14} />
+                <span>Download PDF</span>
+              </a>
+
               <button
                 onClick={handlePrint}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition-all shadow-md hover:shadow-purple-500/25"
-                title="Print or Save as PDF"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-semibold transition-colors cursor-pointer"
+                title="Print Resume"
               >
                 <Printer size={14} />
-                <span className="hidden sm:inline">Print / Download PDF</span>
+                <span className="hidden sm:inline">Print</span>
               </button>
               
               <button

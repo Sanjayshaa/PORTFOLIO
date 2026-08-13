@@ -127,14 +127,25 @@ export default function Contact({ onOpenResume }: ContactProps) {
               <ArrowUpRight size={14} className="text-[#8B95A5]" />
             </a>
 
-            {/* Resume Trigger */}
+            {/* Resume Trigger & Direct PDF Download */}
             <button
               onClick={onOpenResume}
               className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-[#0D1117] border border-[#242A33] hover:border-purple-500/40 text-white font-mono text-xs tracking-wider uppercase transition-colors cursor-pointer"
             >
               <FileText size={16} className="text-purple-400" />
-              <span>Resume</span>
+              <span>Preview Resume</span>
             </button>
+
+            <a
+              href="/Sanjay_S_Resume.pdf"
+              download="Sanjay_S_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-purple-600/20 border border-purple-500/40 hover:bg-purple-600 hover:text-white text-purple-300 font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-md cursor-pointer"
+            >
+              <FileText size={16} />
+              <span>Download PDF ↗</span>
+            </a>
           </motion.div>
         </div>
 
